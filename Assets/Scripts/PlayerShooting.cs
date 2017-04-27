@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerShooting : MonoBehaviour {
+public class PlayerShooting : MonoBehaviour
+{
     public GameObject ammo;
 
     public float maxLength = 3.0f;
@@ -14,7 +15,7 @@ public class PlayerShooting : MonoBehaviour {
     public Rigidbody2D rigid;
     public float rad;//radius
     public int layerNum;
-    
+
     private Ray rayToMouse;
     private Ray leftCataToProjectile;
     private bool clickedOn;
@@ -33,9 +34,9 @@ public class PlayerShooting : MonoBehaviour {
         LineRendererSetUp();
         rayToMouse = new Ray(catapult.position, Vector3.zero);
         maxLengthSqr = maxLength * maxLength;
-        leftCataToProjectile = new Ray(cataFront.transform.position, Vector3.zero);      
+        leftCataToProjectile = new Ray(cataFront.transform.position, Vector3.zero);
         rad = circle.radius;
-        
+
         cataBack.SetColors(Color.black, Color.black);
         cataFront.SetColors(Color.black, Color.black);
 
@@ -58,7 +59,7 @@ public class PlayerShooting : MonoBehaviour {
             if (!rigid.isKinematic && prevVelocity.sqrMagnitude > rigid.velocity.sqrMagnitude)
             {
                 Destroy(spring);
-                rigid.velocity = 1f * prevVelocity;
+                rigid.velocity = prevVelocity;
             }
 
             if (!clickedOn)
@@ -113,12 +114,12 @@ public class PlayerShooting : MonoBehaviour {
 
         cataBack.sortingOrder = 1;
         cataFront.sortingOrder = 3;
-       
+
     }
 
     private void Dragging()
     {
-        Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);  
+        Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 cataToMouse = mousePoint - catapult.position;
 
         if (cataToMouse.sqrMagnitude > maxLengthSqr)

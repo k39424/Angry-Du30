@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     public float respawnRate;
     public float nextRespawn;
@@ -19,4 +20,4 @@ public class LevelManager : MonoBehaviour {
             Instantiate(enemies, respawnPoint[rndVal].position, transform.rotation);
         }
     }
-    }
+}
