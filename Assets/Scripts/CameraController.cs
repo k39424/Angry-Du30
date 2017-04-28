@@ -18,9 +18,7 @@ public class CameraController : MonoBehaviour {
 
     private void Start()
     {
-        rigid = target.GetComponent<Rigidbody2D>();
         resetVelSqr = resetVel * resetVel;
-        spring = target.GetComponent<SpringJoint2D>();
     }
     private void FixedUpdate()
     {
@@ -30,38 +28,28 @@ public class CameraController : MonoBehaviour {
 
     private void FocusOnAmmo()
     {
-        //if (rigid != null && rigid.velocity.sqrMagnitude > focusVel * focusVel)
           if(target != null && spring == null) 
           {
             Vector3 newPosition = transform.position;
             newPosition.x = target.transform.position.x;
+            Debug.Log(target.transform.position.x);
             newPosition.x = Mathf.Clamp(newPosition.x, leftBound.position.x, rightBound.position.x);
             //transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
             transform.position = newPosition;
             if (transform.position.y < minY)
             {
-                transform.position = new Vector3(transform.position.x, minY, transform.position.z);
+                transform.position = new Vector3(transform.position.x, minY, -10f);
             }
- 
-                if (spring == null && rigid.velocity.sqrMagnitude < resetVelSqr)
-                {
-                    ResetTarget();
-                }
            }
-    }
-
-    public void ResetTarget()
-    {
-                string sceneName = SceneManager.GetActiveScene().name;
-                SceneManager.LoadScene(sceneName);
     }
 
     public void SetTarget(GameObject ammo)
     {
-        if (target == null)
-        {
-            target = ammo;
-        }
+        target = ammo;
+        spring = target.GetComponent<SpringJoint2D>();
+        rigid = target.GetComponent<Rigidbody2D>();
+
+        transform.position = new Vector3 (target.transform.position.x, minY, -10f);
     }
 
 }
