@@ -27,15 +27,16 @@ public class PlayerControl : MonoBehaviour {
 
     public float angle;
     public float vi;
-    public float fTime;
+
     private Vector2 startPos;
     private Ray ammoToSling;
-    public float hSpeed;
-    public float vSpeed;
+    
     public GameObject dotObj;
 
+    public List<GameObject> trajectDots;
+    public float numOfDots;
     public CameraController cameraController;
-
+    Vector2 initVel;
     private bool clicked;
 
     private void Start()
@@ -65,7 +66,14 @@ public class PlayerControl : MonoBehaviour {
 
         //rayToMouse = new Ray(slingShot.transform.position, Vector3.zero);
         //leftSlingToAmmo = new Ray(slingFront.transform.position, Vector3.zero);
-       
+
+        //instantiate dots gameObj to list
+        for (int i = 0; i < numOfDots; i++)
+        {
+            GameObject dot = (GameObject)Instantiate(dotObj);
+            dot.SetActive(false);
+            trajectDots.Insert(i, dot);
+        }
     }
 
     private void Update()
@@ -81,17 +89,32 @@ public class PlayerControl : MonoBehaviour {
 
         LineRendererUpdate();
 
+       
+
         if (spring != null)
         {
-            if (ammoRigid.isKinematic == false && ammoRigid.velocity.sqrMagnitude < prevVelocity.sqrMagnitude)
+            if (ammoRigid.isKinematic == false && ammoRigid.velocity.sqrMagnitude > prevVelocity.sqrMagnitude)
             {
+                //if (slingShot.transform.position.x < ammoRigid.transform.position.x)
+                //    ammoRigid.AddForce(initVel,ForceMode2D.Force);
+                //ammoRigid.AddForce(GetForceFrom(ammoRigid.transform.position, slingShot.transform.position));
+
                 Destroy(spring);
-                ammoRigid.velocity = prevVelocity;
-                Debug.Log("Must disable input here");
+              
+                ammoRigid.AddForce(initVel,ForceMode2D.Force);
+                // ammoRigid.velocity = prevVelocity;
+                // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position));
+
+
             }
 
             else if (!clicked)
-                prevVelocity = ammoRigid.velocity;
+                ammoRigid.AddForce(initVel, ForceMode2D.Force);
+                //prevVelocity = ammoRigid.velocity;
+                // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position) );//no forceMode2d
+                
+            
+            Debug.Log("initVel = " + initVel);
 
         }
         else
@@ -102,6 +125,11 @@ public class PlayerControl : MonoBehaviour {
 
         if (spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr)
             Reload();
+    }
+
+    private Vector2 GetForceFrom(Vector2 toPos, Vector2 fromPos)
+    {//Get Force From: ToPos - FromPos * power
+        return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f/ammoRigid.mass;
     }
 
     public void Reload()
@@ -126,7 +154,8 @@ public class PlayerControl : MonoBehaviour {
 
         rayToMouse = new Ray(slingShot.transform.position, Vector3.zero);
         leftSlingToAmmo = new Ray(slingFront.transform.position, Vector3.zero);
-
+        
+        ammoRigid.isKinematic = true;
         LineRendererSetUp();
         LineRendererUpdate();
 
@@ -141,16 +170,22 @@ public class PlayerControl : MonoBehaviour {
     private void OnMouseUp()
     {
         clicked = false;
-        spring.enabled = true;
+
+        if(spring != null)
+            spring.enabled = true;
+
         ammoRigid.isKinematic = false;
     }
 
     private void Dragging()
     {
-
+        
         Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 slingToMouse = mousePoint - slingShot.transform.position;
-
+        //angle = Mathf.Atan2(pVel.y, pVel.x) * Mathf.Rad2Deg;
+       
+        //for clamping angles
+       // float mouseAngle = Mathf.Atan2(mousePoint.y, mousePoint.x) * Mathf.Rad2Deg;
         if (slingToMouse.sqrMagnitude > maxLengthSqr)
         {
             rayToMouse.direction = slingToMouse;
@@ -160,8 +195,19 @@ public class PlayerControl : MonoBehaviour {
         mousePoint.z = 0;
         ammo.transform.position = mousePoint;
         ammoToSling.origin = mousePoint;
-       // DrawTrajec();
+        ammoToSling.direction = slingShot.transform.position - ammo.transform.position;
+
+        Debug.DrawRay(ammoToSling.origin, ammoToSling.direction);
+       
+        startPos = ammoToSling.direction;
+
+       initVel = GetForceFrom(slingShot.transform.position, ammoRigid.transform.position);
+
+       // Vector2 vel = new Vector2(slingShot.transform.position.x, slingShot.transform.position.y) - new Vector2(ammoToSling.origin.x, ammoToSling.origin.y);
+        Debug.Log("Vel = " +initVel/ammoRigid.mass);
+        DrawTraject(new Vector2(ammoRigid.transform.position.x, ammoRigid.transform.position.y + 0.5f), initVel);
     }
+    
 
     private void LineRendererSetUp()
     {
@@ -190,26 +236,34 @@ public class PlayerControl : MonoBehaviour {
         slingBack.SetPosition(1, holdPoint);
     }
 
-    private void DrawTrajec()
+    private void DrawTraject(Vector2 pStartPos,Vector2 pVel)
     {
-        vi = prevVelocity.magnitude;
+        Debug.Log("pVel.x = " + pVel.x +  "/pVel.y = " +pVel.y);
+        vi = Mathf.Sqrt((pVel.x * pVel.x) + (pVel.y * pVel.y)) * 4.96f;
+        //vi = pVel.magnitude;
+        Debug.Log("vi = " + vi);
+        // vi = pVel.magnitude;
+        // float vX = pVel * Time;
+        angle = Mathf.Atan2(pVel.y, pVel.x) * Mathf.Rad2Deg;
+        if (angle < 0)
+            angle = 360 - Mathf.Abs(angle);
 
-        ammoToSling.direction = slingShot.transform.position - ammo.transform.position;
-        startPos = ammoToSling.direction;
-        Debug.DrawRay(ammoToSling.origin, ammoToSling.direction);
+        float fTime = 0;
+        Debug.Log("angle = " + angle);
+        fTime += 0.2f;
 
-        angle = Mathf.Atan2(ammoToSling.direction.y, ammoToSling.direction.x) * Mathf.Rad2Deg;
-
-
-        for (float i = 0.5f; i < 3f; i += 0.5f)
+        for (int i = 0; i < numOfDots; i ++)
         {
-            hSpeed = startPos.x + ( Mathf.Cos(angle) * vi * i);
+           float hSpeed = vi * fTime * Mathf.Cos(angle * Mathf.Deg2Rad);
 
-            vSpeed = startPos.y + (Mathf.Sin(angle) * vi - (0.5f * Physics.gravity.magnitude * i * i));
-
-
-             Instantiate(dotObj, new Vector3(hSpeed, vSpeed, 0f), Quaternion.identity);
-
+           float vSpeed = vi * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime/2.0f);
+            Debug.Log("vSpeed = " + vSpeed);
+            Vector3 pos = new Vector3(pStartPos.x + hSpeed, pStartPos.y + vSpeed, 0.0f);
+           
+            trajectDots[i].transform.position = pos;
+            trajectDots[i].SetActive(true);
+           trajectDots[i].transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(pVel.y - (Physics.gravity.magnitude) * fTime, pVel.x) * Mathf.Rad2Deg);
+            fTime += 0.2f;
         }
     }
 }

@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
           {
             Vector3 newPosition = transform.position;
             newPosition.x = target.transform.position.x;
-            Debug.Log(target.transform.position.x);
+            
             newPosition.x = Mathf.Clamp(newPosition.x, leftBound.position.x, rightBound.position.x);
             //transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
             transform.position = newPosition;
