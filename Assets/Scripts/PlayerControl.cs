@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour {
     public Rigidbody2D myRigid;
     public LineRenderer slingBack;
     public LineRenderer slingFront;
+    public BoxCollider2D slingBox;
 
     public GameObject ammoPrefab;
     public GameObject ammo;
@@ -90,11 +91,13 @@ public class PlayerControl : MonoBehaviour {
         LineRendererUpdate();
 
        
-
+        //fire
         if (spring != null)
         {
+           
             if (ammoRigid.isKinematic == false && ammoRigid.velocity.sqrMagnitude > prevVelocity.sqrMagnitude)
             {
+                
                 //if (slingShot.transform.position.x < ammoRigid.transform.position.x)
                 //    ammoRigid.AddForce(initVel,ForceMode2D.Force);
                 //ammoRigid.AddForce(GetForceFrom(ammoRigid.transform.position, slingShot.transform.position));
@@ -178,14 +181,21 @@ public class PlayerControl : MonoBehaviour {
     }
 
     private void Dragging()
-    {
+    {//have to clamp angles
         
         Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 slingToMouse = mousePoint - slingShot.transform.position;
-        //angle = Mathf.Atan2(pVel.y, pVel.x) * Mathf.Rad2Deg;
-       
+        angle = Mathf.Atan2(mousePoint.x, mousePoint.y) * Mathf.Rad2Deg;
+
+        //if (angle < 70)
+        //{
+        //    float angleX = Mathf.Cos(angle) * slingToMouse.magnitude;
+        //    float angleY = Mathf.Sin(angle) * slingToMouse.magnitude;
+
+        //    mousePoint = new Vector3(angleX, angleY, 0f);
+        //}
         //for clamping angles
-       // float mouseAngle = Mathf.Atan2(mousePoint.y, mousePoint.x) * Mathf.Rad2Deg;
+      //  float mouseAngle = Mathf.Atan2(mousePoint.y, mousePoint.x) * Mathf.Rad2Deg;
         if (slingToMouse.sqrMagnitude > maxLengthSqr)
         {
             rayToMouse.direction = slingToMouse;
