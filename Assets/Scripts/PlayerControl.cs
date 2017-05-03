@@ -83,7 +83,14 @@ public class PlayerControl : MonoBehaviour {
             OnClick();
 
         if (Input.GetMouseButtonUp(0))
+        {
             OnMouseUp();
+            for (int i = 0; i < numOfDots; i++)
+            {
+                trajectDots[i].SetActive(false);
+            }
+        }
+            
 
         if (clicked == true)
             Dragging();
