@@ -16,7 +16,5 @@ public class GameCanvas : MonoBehaviour {
         }
         else
             Debug.Log("Hey");
-
-       
     }
 }

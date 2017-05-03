@@ -5,10 +5,21 @@ public class EnemyHealth : MonoBehaviour {
     public float maxHealth;
     public float currentHealth;
 
+    public float damage;
+    
+    
+
+    public LevelManager levelManager;
+
     private void Start() {
         currentHealth = maxHealth;
+        damage = 1f;
+
+        levelManager = GetComponent<LevelManager>();
      }
-    public void DamageHealth(float damage) {
+
+    public void DamageHealth(float damage)
+    {
         currentHealth -= damage;
     }
 
@@ -18,8 +29,19 @@ public class EnemyHealth : MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Ammo")
+        {
+            Debug.Log("Hit!");
+            //DamageHealth(damage);
+        }
+    }
+
     public void Dead()
     {
-        Destroy(gameObject);
+        Debug.Log("Dead");
+        //Destroy(gameObject);
+        //levelManager.EnemiesKilledCounter();
     }
 }
