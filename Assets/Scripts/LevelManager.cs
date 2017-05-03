@@ -31,19 +31,17 @@ public class LevelManager : MonoBehaviour
         else if(ammoCount <= 0)
         {
             YouLose();
-
         }
     }
 
     public void YouWin()
     {
         Time.timeScale = 0;
-
-    }
+    } 
 
     public void YouLose()
     {
-
+        Time.timeScale = 0;
     }
 
     public void EnemiesKilledCounter()
