@@ -10,11 +10,9 @@ public class GameCanvas : MonoBehaviour {
     {
         if (other.gameObject.tag == "Ammo")
         {
-            Debug.Log("exited");
-            //    Destroy(other.gameObject);
-            //    playerControl.Reload();
+            // Debug.Log("exited");
+            Destroy(other.gameObject);
+            playerControl.Reload();
         }
-        else
-            Debug.Log("Hey");
     }
 }

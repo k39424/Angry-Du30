@@ -9,7 +9,7 @@ public class AmmoLifeTime : MonoBehaviour {
     public GameObject ammo;
     public SpringJoint2D spring;
     public Rigidbody2D rigid;
-
+   
     private void Awake()
     {
         spring = GetComponent<SpringJoint2D>();
@@ -18,13 +18,18 @@ public class AmmoLifeTime : MonoBehaviour {
 
         if (lifeTime <= 0)
             lifeTime = 3.0f;
-
-        if (rigid.isKinematic == false)
-        {
-            Debug.Log("Destroy!");
-            Destroy(gameObject, lifeTime);
-        }
     }
 
-  
+    private void Update()
+    {
+        if (spring == null)
+        {
+            Destroy(ammo, lifeTime);
+        }
+
+        else
+        {
+
+        }
+    }
 }

@@ -7,9 +7,7 @@ public class Projectile : MonoBehaviour {
     public EnemyHealth enemyHealth;
     public float damageHp;
 
-    private void OnAwake() {
-        Debug.Log("Fired");
-        
+    private void Awake() {  
         myRigid = GetComponent<Rigidbody2D>();
         //rigidBody.AddForce(transform.right * projectileSpeed, ForceMode2D.Impulse);
     }
@@ -21,9 +19,14 @@ public class Projectile : MonoBehaviour {
             enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
             enemyHealth.DamageHealth(damageHp);
         }
-        else
+
+        else if (other.gameObject.tag == "Civilian")
         {
-            Debug.Log("ammo");
+            LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+            levelManager.YouLose();
         }
+    
     }
+
+    
 }

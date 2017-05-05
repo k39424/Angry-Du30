@@ -29,7 +29,7 @@ public class PlayerControl : MonoBehaviour {
     public float angle;
     public float vi;
 
-    private Vector2 startPos;
+    //private Vector2 startPos;
     private Ray ammoToSling;
     
     public GameObject dotObj;
@@ -40,7 +40,7 @@ public class PlayerControl : MonoBehaviour {
     Vector2 initVel;
     private bool clicked;
 
-    private void Start()
+    private void Awake()
     {
         slingShot = this.gameObject;
         slingFront = GetComponent<LineRenderer>();
@@ -79,8 +79,10 @@ public class PlayerControl : MonoBehaviour {
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
             OnClick();
+
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -90,12 +92,21 @@ public class PlayerControl : MonoBehaviour {
                 trajectDots[i].SetActive(false);
             }
         }
-            
+#else
+            If(Input.GetTouch(0).position)
+            OnClick();
+#endif
+
+
+
 
         if (clicked == true)
+        {
             Dragging();
 
-        LineRendererUpdate();
+            LineRendererUpdate();
+        }
+           
 
        
         //fire
@@ -124,7 +135,7 @@ public class PlayerControl : MonoBehaviour {
                 // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position) );//no forceMode2d
                 
             
-            Debug.Log("initVel = " + initVel);
+            //Debug.Log("initVel = " + initVel);
 
         }
         else
@@ -139,7 +150,8 @@ public class PlayerControl : MonoBehaviour {
 
     private Vector2 GetForceFrom(Vector2 toPos, Vector2 fromPos)
     {//Get Force From: ToPos - FromPos * power
-        return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f/ammoRigid.mass;
+        //return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f/ammoRigid.mass;
+        return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f / ammoRigid.mass;
     }
 
     public void Reload()
@@ -214,14 +226,14 @@ public class PlayerControl : MonoBehaviour {
         ammoToSling.origin = mousePoint;
         ammoToSling.direction = slingShot.transform.position - ammo.transform.position;
 
-        Debug.DrawRay(ammoToSling.origin, ammoToSling.direction);
+        //Debug.DrawRay(ammoToSling.origin, ammoToSling.direction);
        
-        startPos = ammoToSling.direction;
+        //startPos = ammoToSling.direction;
 
        initVel = GetForceFrom(slingShot.transform.position, ammoRigid.transform.position);
 
        // Vector2 vel = new Vector2(slingShot.transform.position.x, slingShot.transform.position.y) - new Vector2(ammoToSling.origin.x, ammoToSling.origin.y);
-        Debug.Log("Vel = " +initVel/ammoRigid.mass);
+        //Debug.Log("Vel = " +initVel/ammoRigid.mass);
         DrawTraject(new Vector2(ammoRigid.transform.position.x, ammoRigid.transform.position.y + 0.5f), initVel);
     }
     
@@ -239,8 +251,11 @@ public class PlayerControl : MonoBehaviour {
         slingBack.sortingOrder = 3;
         slingFront.sortingOrder = 1;
 
-        slingBack.SetWidth(0.2f, 0.1f);
-        slingFront.SetWidth(0.2f, 0.1f);
+        slingBack.startWidth = 0.2f;
+        slingBack.endWidth = 0.1f;
+
+        slingFront.startWidth = 0.2f;
+        slingFront.endWidth = 0.1f;
     }
 
     private void LineRendererUpdate()
@@ -255,9 +270,10 @@ public class PlayerControl : MonoBehaviour {
 
     private void DrawTraject(Vector2 pStartPos,Vector2 pVel)
     {
-        Debug.Log("pVel.x = " + pVel.x +  "/pVel.y = " +pVel.y);
+        Debug.Log("pVel.x = " + pVel.x + "/pVel.y = " + pVel.y);
+       
         vi = Mathf.Sqrt((pVel.x * pVel.x) + (pVel.y * pVel.y)) * 4.96f;
-        //vi = pVel.magnitude;
+
         Debug.Log("vi = " + vi);
         // vi = pVel.magnitude;
         // float vX = pVel * Time;
@@ -266,7 +282,7 @@ public class PlayerControl : MonoBehaviour {
             angle = 360 - Mathf.Abs(angle);
 
         float fTime = 0;
-        Debug.Log("angle = " + angle);
+        //Debug.Log("angle = " + angle);
         fTime += 0.2f;
 
         for (int i = 0; i < numOfDots; i ++)
@@ -274,7 +290,7 @@ public class PlayerControl : MonoBehaviour {
            float hSpeed = vi * fTime * Mathf.Cos(angle * Mathf.Deg2Rad);
 
            float vSpeed = vi * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime/2.0f);
-            Debug.Log("vSpeed = " + vSpeed);
+            //Debug.Log("vSpeed = " + vSpeed);
             Vector3 pos = new Vector3(pStartPos.x + hSpeed, pStartPos.y + vSpeed, 0.0f);
            
             trajectDots[i].transform.position = pos;

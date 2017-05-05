@@ -8,14 +8,11 @@ public class EnemyHealth : MonoBehaviour {
 
     public float damage;
     
-   
     private void Awake() {
         currentHealth = maxHealth;
         damage = 1f;
 
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-
-        
      }
 
     public void DamageHealth(float damage)
@@ -40,9 +37,6 @@ public class EnemyHealth : MonoBehaviour {
 
     public void Dead()
     {
-        Debug.Log("Dead");
-        //Destroy(gameObject);
-        //levelManager.EnemiesKilledCounter();
         levelManager.EnemiesKilledCounter();
         Destroy(gameObject);
     }

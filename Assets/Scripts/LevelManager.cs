@@ -1,63 +1,95 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
 
-    public float respawnRate;
-    public float nextRespawn;
-    public Transform[] respawnPoint;
+   // public float respawnRate;
+   // public float nextRespawn;
+    //public Transform[] respawnPoint;
     public GameObject enemies;
     public int rndVal;
-    public int enemiesToKill;
-    public int enemiesKilled;
-    public float ammoCount;
+    public float enemiesToKill;
+    public float enemiesKilled;
+    public float ammoCount = 1;
     public GameObject winPanel;
     public GameObject losePanel;
     public PlayerControl playerControl;
 
+    public Text enemiesKilledText;
+    public Text enemiesToKillText;
+
+    public float secondsToWait =.1f;
+
+
     public void Start()
     {
-        playerControl = GameObject.Find("SlingShot").GetComponent<PlayerControl>();
+        playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
         ammoCount = playerControl.ammoCount;
+
+        UpdateEnemiesText();
     }
 
     public void Update()
     {
-        if (Time.time > nextRespawn)
-        {
-            nextRespawn += respawnRate;
-            rndVal = Random.Range(0, 2);
-            Instantiate(enemies, respawnPoint[rndVal].position, transform.rotation);
-        }
+        //if (Time.time > nextRespawn)
+        //{
+        //    nextRespawn += respawnRate;
+        //    rndVal = Random.Range(0, 2);
+        //    Instantiate(enemies, respawnPoint[rndVal].position, transform.rotation);
+        //}
 
         if (enemiesKilled >= enemiesToKill)
         {
+          
             YouWin();
         }
 
         else if (ammoCount <= 0 && enemiesKilled < enemiesToKill && Time.time > 0f)
         {
+            
             YouLose();
         }
     }
 
     public void YouWin()
     {
-        Debug.LogWarning("You Win");
-        Time.timeScale = 0;
-        winPanel.SetActive(true);
+        playerControl.enabled = false;
+        StartCoroutine(IEYouWin());
     }
 
     public void YouLose()
     {
-        Debug.LogWarning("You Lose");
-        Time.timeScale = 0;
-        losePanel.SetActive(true);
+        playerControl.enabled = false;
+        StartCoroutine(IEYouLose());
     }
 
     public void EnemiesKilledCounter()
     {
         enemiesKilled += 1;
+        UpdateEnemiesText();
+        
+    }
+
+    public void UpdateEnemiesText()
+    {
+        enemiesKilledText.text = enemiesKilled.ToString();
+        enemiesToKillText.text = enemiesToKill.ToString();
+    }
+    
+    private IEnumerator IEYouWin()
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        Time.timeScale = 0;
+        winPanel.SetActive(true);
+    }
+
+    public IEnumerator IEYouLose()
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        Time.timeScale = 0;
+       
+        losePanel.SetActive(true);
     }
 }
