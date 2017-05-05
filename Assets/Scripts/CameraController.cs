@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour {
     {
           if(target != null && spring == null) 
           {
+            
             Vector3 newPosition = transform.position;
             newPosition.x = target.transform.position.x;
             

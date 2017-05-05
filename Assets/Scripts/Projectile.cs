@@ -2,23 +2,28 @@
 using System.Collections;
 
 public class Projectile : MonoBehaviour {
-    public Rigidbody2D rigidBody;
+    public Rigidbody2D myRigid;
     public float projectileSpeed;
     public EnemyHealth enemyHealth;
     public float damageHp;
 
-    private void Awake() {
+    private void OnAwake() {
         Debug.Log("Fired");
         
-        rigidBody.GetComponent<Rigidbody2D>();
-        rigidBody.AddForce(transform.right * projectileSpeed, ForceMode2D.Impulse);
+        myRigid = GetComponent<Rigidbody2D>();
+        //rigidBody.AddForce(transform.right * projectileSpeed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag == "Enemy") {
+        if (other.gameObject.tag == "Enemy")
+        {
             damageHp = 1;
-           enemyHealth =  other.gameObject.GetComponent<EnemyHealth>();
+            enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
             enemyHealth.DamageHealth(damageHp);
+        }
+        else
+        {
+            Debug.Log("ammo");
         }
     }
 }

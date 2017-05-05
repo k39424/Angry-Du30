@@ -9,11 +9,13 @@ public class EnemyHealth : MonoBehaviour {
     public float damage;
     
    
-    private void Start() {
+    private void Awake() {
         currentHealth = maxHealth;
         damage = 1f;
 
-        levelManager = GetComponent<LevelManager>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
+        
      }
 
     public void DamageHealth(float damage)
