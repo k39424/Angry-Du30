@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour {
             newPosition.x = target.transform.position.x;
             
             newPosition.x = Mathf.Clamp(newPosition.x, leftBound.position.x, rightBound.position.x);
-            //transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
             transform.position = newPosition;
             if (transform.position.y < minY)
             {
