@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
     public GameObject slingShot;
+    public Transform slingTrans;
     public Rigidbody2D myRigid;
     public LineRenderer slingBack;
     public LineRenderer slingFront;
@@ -28,6 +29,8 @@ public class PlayerControl : MonoBehaviour {
 
     public float angle;
     public float vi;
+
+    Vector3 mousePoint;
 
     //private Vector2 startPos;
     private Ray ammoToSling;
@@ -87,10 +90,10 @@ public class PlayerControl : MonoBehaviour {
         if (Input.GetMouseButtonUp(0))
         {
             OnMouseUp();
-            for (int i = 0; i < numOfDots; i++)
-            {
-                trajectDots[i].SetActive(false);
-            }
+            //for (int i = 0; i < numOfDots; i++)
+            //{
+            //    trajectDots[i].SetActive(false);
+            //}
         }
 #else
             If(Input.GetTouch(0).position)
@@ -109,49 +112,57 @@ public class PlayerControl : MonoBehaviour {
            
 
        
-        //fire
-        if (spring != null)
-        {
-           
-            if (ammoRigid.isKinematic == false && ammoRigid.velocity.sqrMagnitude > prevVelocity.sqrMagnitude)
-            {
-                
-                //if (slingShot.transform.position.x < ammoRigid.transform.position.x)
-                //    ammoRigid.AddForce(initVel,ForceMode2D.Force);
-                //ammoRigid.AddForce(GetForceFrom(ammoRigid.transform.position, slingShot.transform.position));
-
-                Destroy(spring);
-              
-                ammoRigid.AddForce(initVel,ForceMode2D.Force);
-                // ammoRigid.velocity = prevVelocity;
-                // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position));
-
-
-            }
-
-            else if (!clicked)
-                ammoRigid.AddForce(initVel, ForceMode2D.Force);
-                //prevVelocity = ammoRigid.velocity;
-                // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position) );//no forceMode2d
-                
-            
-            //Debug.Log("initVel = " + initVel);
-
-        }
-        else
-        {
-            slingFront.enabled = false;
-            slingBack.enabled = false;
-        }
-
+        
         if (spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr)
             Reload();
     }
 
     private Vector2 GetForceFrom(Vector2 toPos, Vector2 fromPos)
-    {//Get Force From: ToPos - FromPos * power
-        //return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f/ammoRigid.mass;
-        return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f / ammoRigid.mass;
+    {//Get Force From: ToPosition - FromPosition * power
+     //return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f/ammoRigid.mass;
+        Vector2 velDir = new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y);
+       
+        return (velDir) * slingShot.transform.InverseTransformPoint(ammo.transform.position).magnitude;
+       
+        
+    }
+
+    public void Launch()
+    {
+        
+            //if (ammoRigid.isKinematic == false && ammoRigid.velocity.sqrMagnitude < initVel.sqrMagnitude)
+            //{
+                //Destroy(spring);
+                Debug.LogWarning("initVel: " + initVel);
+                ammoRigid.velocity = initVel;
+        //if (slingShot.transform.position.x < ammoRigid.transform.position.x)
+        //    ammoRigid.AddForce(initVel,ForceMode2D.Force);
+        // ammoRigid.AddForce(GetForceFrom(ammoRigid.transform.position, slingShot.transform.position));
+
+        //Destroy(spring);
+
+        //ammoRigid.AddForce(initVel,ForceMode2D.Force);
+        // ammoRigid.velocity = prevVelocity;
+        // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position));
+
+
+        //}
+
+        //else if (!clicked)
+        //    ammoRigid.AddForce(initVel, ForceMode2D.Impulse);
+        //prevVelocity = ammoRigid.velocity;
+        // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position) );//no forceMode2d
+
+
+
+
+
+        //else
+        //{
+        //    slingFront.enabled = false;
+        //    slingBack.enabled = false;
+        //}
+
     }
 
     public void Reload()
@@ -197,12 +208,14 @@ public class PlayerControl : MonoBehaviour {
             spring.enabled = true;
 
         ammoRigid.isKinematic = false;
+        LineRendererUpdate();
+        StartCoroutine(ReleaseDelay());
     }
 
     private void Dragging()
     {//have to clamp angles
         
-        Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+       mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 slingToMouse = mousePoint - slingShot.transform.position;
         angle = Mathf.Atan2(mousePoint.x, mousePoint.y) * Mathf.Rad2Deg;
 
@@ -226,15 +239,10 @@ public class PlayerControl : MonoBehaviour {
         ammoToSling.origin = mousePoint;
         ammoToSling.direction = slingShot.transform.position - ammo.transform.position;
 
-        //Debug.DrawRay(ammoToSling.origin, ammoToSling.direction);
+       initVel = GetForceFrom(slingTrans.transform.position, ammoRigid.transform.position);
+        Debug.Log("InitVel" + initVel);
        
-        //startPos = ammoToSling.direction;
-
-       initVel = GetForceFrom(slingShot.transform.position, ammoRigid.transform.position);
-
-       // Vector2 vel = new Vector2(slingShot.transform.position.x, slingShot.transform.position.y) - new Vector2(ammoToSling.origin.x, ammoToSling.origin.y);
-        //Debug.Log("Vel = " +initVel/ammoRigid.mass);
-        DrawTraject(new Vector2(ammoRigid.transform.position.x, ammoRigid.transform.position.y + 0.5f), initVel);
+        DrawTraject(new Vector2(ammoRigid.transform.position.x, ammoRigid.transform.position.y), initVel);
     }
     
 
@@ -272,31 +280,43 @@ public class PlayerControl : MonoBehaviour {
     {
         Debug.Log("pVel.x = " + pVel.x + "/pVel.y = " + pVel.y);
        
-        vi = Mathf.Sqrt((pVel.x * pVel.x) + (pVel.y * pVel.y)) * 4.96f;
+        vi = Mathf.Sqrt((pVel.x * pVel.x) + (pVel.y * pVel.y));
+     
 
         Debug.Log("vi = " + vi);
-        // vi = pVel.magnitude;
-        // float vX = pVel * Time;
+       
+       
         angle = Mathf.Atan2(pVel.y, pVel.x) * Mathf.Rad2Deg;
-        if (angle < 0)
-            angle = 360 - Mathf.Abs(angle);
+      
 
         float fTime = 0;
-        //Debug.Log("angle = " + angle);
-        fTime += 0.2f;
+        Debug.Log("angle = " + angle);
+        //fTime += 0.06f;
 
         for (int i = 0; i < numOfDots; i ++)
         {
            float hSpeed = vi * fTime * Mathf.Cos(angle * Mathf.Deg2Rad);
 
            float vSpeed = vi * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime/2.0f);
-            //Debug.Log("vSpeed = " + vSpeed);
+            Debug.Log("hSpeed = " + hSpeed);
             Vector3 pos = new Vector3(pStartPos.x + hSpeed, pStartPos.y + vSpeed, 0.0f);
            
             trajectDots[i].transform.position = pos;
             trajectDots[i].SetActive(true);
            trajectDots[i].transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(pVel.y - (Physics.gravity.magnitude) * fTime, pVel.x) * Mathf.Rad2Deg);
-            fTime += 0.2f;
+            fTime += 0.06f;
         }
+    }
+
+    public IEnumerator ReleaseDelay()
+    {
+
+        yield return new WaitForSeconds(.01f);
+
+        Destroy(spring);
+       
+        
+        //yield return new WaitForSeconds(.0f);
+        Launch();
     }
 }

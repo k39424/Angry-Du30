@@ -19,3 +19,14 @@ D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.Networking.xml
 D:\Unity\Projects\D-30 Project\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 D:\Unity\Projects\D-30 Project\obj\Debug\Assembly-CSharp.dll
 D:\Unity\Projects\D-30 Project\obj\Debug\Assembly-CSharp.pdb
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\Facebook.Unity.Settings.dll
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\nunit.framework.dll
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.Analytics.dll
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.HoloLens.dll
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.TestRunner.dll
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.VR.dll
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.TestRunner.xml
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\nunit.framework.xml
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.Analytics.xml
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.HoloLens.xml
+D:\Unity\Projects\D-30 Project\Temp\bin\Debug\UnityEngine.VR.xml
