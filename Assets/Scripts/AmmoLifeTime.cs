@@ -22,7 +22,7 @@ public class AmmoLifeTime : MonoBehaviour {
 
     private void Update()
     {
-        if (spring == null)
+        if (spring == null && ammo.GetComponent<Rigidbody2D>().velocity.magnitude <= 0.3f)
         {
             Destroy(ammo, lifeTime);
         }

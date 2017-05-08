@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour {
 
     private void Awake() {  
         myRigid = GetComponent<Rigidbody2D>();
-        //rigidBody.AddForce(transform.right * projectileSpeed, ForceMode2D.Impulse);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour {
             damageHp = 1;
             enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
             enemyHealth.DamageHealth(damageHp);
+           // myRigid.velocity = Vector2.zero;
         }
 
         else if (other.gameObject.tag == "Civilian")

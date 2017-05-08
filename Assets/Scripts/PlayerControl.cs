@@ -85,21 +85,20 @@ public class PlayerControl : MonoBehaviour {
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
             OnClick();
+        
 
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            OnMouseUp();
-            //for (int i = 0; i < numOfDots; i++)
-            //{
-            //    trajectDots[i].SetActive(false);
-            //}
-        }
 #else
             If(Input.GetTouch(0).position)
             OnClick();
 #endif
-
+        if (Input.GetMouseButtonUp(0))
+        {
+            OnMouseUp();
+            for (int i = 0; i < numOfDots; i++)
+            {
+                trajectDots[i].SetActive(false);
+            }
+        }
 
 
 
@@ -109,10 +108,15 @@ public class PlayerControl : MonoBehaviour {
 
             LineRendererUpdate();
         }
-           
 
-       
-        
+
+        LineRendererUpdate();
+        if (ammoRigid.isKinematic == false && ammoRigid != null)
+        {
+            StartCoroutine(RemoveString());
+           
+        }
+
         if (spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr)
             Reload();
     }
@@ -130,39 +134,10 @@ public class PlayerControl : MonoBehaviour {
     public void Launch()
     {
         
-            //if (ammoRigid.isKinematic == false && ammoRigid.velocity.sqrMagnitude < initVel.sqrMagnitude)
-            //{
-                //Destroy(spring);
-                Debug.LogWarning("initVel: " + initVel);
-                ammoRigid.velocity = initVel;
-        //if (slingShot.transform.position.x < ammoRigid.transform.position.x)
-        //    ammoRigid.AddForce(initVel,ForceMode2D.Force);
-        // ammoRigid.AddForce(GetForceFrom(ammoRigid.transform.position, slingShot.transform.position));
+        Debug.LogWarning("initVel: " + initVel);
+        ammoRigid.velocity = initVel;
 
-        //Destroy(spring);
-
-        //ammoRigid.AddForce(initVel,ForceMode2D.Force);
-        // ammoRigid.velocity = prevVelocity;
-        // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position));
-
-
-        //}
-
-        //else if (!clicked)
-        //    ammoRigid.AddForce(initVel, ForceMode2D.Impulse);
-        //prevVelocity = ammoRigid.velocity;
-        // ammoRigid.AddForce(GetForceFrom(slingShot.transform.position, ammoRigid.transform.position) );//no forceMode2d
-
-
-
-
-
-        //else
-        //{
-        //    slingFront.enabled = false;
-        //    slingBack.enabled = false;
-        //}
-
+       
     }
 
     public void Reload()
@@ -177,6 +152,7 @@ public class PlayerControl : MonoBehaviour {
 
     private void SetAmmo()
     {
+        StopAllCoroutines();
         if (ammo == null)
             return;
 
@@ -196,6 +172,24 @@ public class PlayerControl : MonoBehaviour {
 
     private void OnClick()
     {
+        //Ray ray = Camera.main.ScreenPointToRay(mousePoint);
+         
+        RaycastHit2D hit = Physics2D.Raycast(mousePoint, Camera.main.transform.forward);
+
+
+
+        //clicked = true;
+        //spring.enabled = false;
+        if (hit.collider.gameObject.name == "Canvas")
+        {
+            
+        }
+                if(hit.collider.gameObject.tag == "Ammo")
+                Debug.LogWarning("Ammo is Touched: " + hit.collider.gameObject.name);
+
+            else
+                Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
+        
         clicked = true;
         spring.enabled = false;
 
@@ -268,12 +262,17 @@ public class PlayerControl : MonoBehaviour {
 
     private void LineRendererUpdate()
     {
-        Vector2 slingToAmmo = ammo.transform.position - slingFront.transform.position;
-        leftSlingToAmmo.direction = slingToAmmo;
-        Vector3 holdPoint = leftSlingToAmmo.GetPoint(slingToAmmo.magnitude + 0.31f);
-        holdPoint.z = 1;
-        slingFront.SetPosition(1, new Vector3(holdPoint.x, holdPoint.y, -1.0f));
-        slingBack.SetPosition(1, holdPoint);
+        if (ammo != null)
+        {
+            Vector2 slingToAmmo = ammo.transform.position - slingFront.transform.position;
+            leftSlingToAmmo.direction = slingToAmmo;
+            Vector3 holdPoint = leftSlingToAmmo.GetPoint(slingToAmmo.magnitude + 0.31f);
+            holdPoint.z = 1;
+            slingFront.SetPosition(1, new Vector3(holdPoint.x, holdPoint.y, -1.0f));
+            slingBack.SetPosition(1, holdPoint);
+        }
+        else
+            return;
     }
 
     private void DrawTraject(Vector2 pStartPos,Vector2 pVel)
@@ -299,7 +298,7 @@ public class PlayerControl : MonoBehaviour {
 
            float vSpeed = vi * fTime * Mathf.Sin(angle * Mathf.Deg2Rad) - (Physics2D.gravity.magnitude * fTime * fTime/2.0f);
             Debug.Log("hSpeed = " + hSpeed);
-            Vector3 pos = new Vector3(pStartPos.x + hSpeed, pStartPos.y + vSpeed, 0.0f);
+            Vector3 pos = new Vector3(pStartPos.x + hSpeed, pStartPos.y + vSpeed, 1f);
            
             trajectDots[i].transform.position = pos;
             trajectDots[i].SetActive(true);
@@ -310,13 +309,17 @@ public class PlayerControl : MonoBehaviour {
 
     public IEnumerator ReleaseDelay()
     {
-
         yield return new WaitForSeconds(.01f);
-
-        Destroy(spring);
-       
         
-        //yield return new WaitForSeconds(.0f);
+        Destroy(spring);
+        
         Launch();
+    }
+
+    public IEnumerator RemoveString()
+    {
+        yield return new WaitForSeconds(0.2f);
+        slingBack.enabled = false;
+        slingFront.enabled = false;
     }
 }
