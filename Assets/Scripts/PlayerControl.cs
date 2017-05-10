@@ -8,13 +8,14 @@ public class PlayerControl : MonoBehaviour {
     public Rigidbody2D myRigid;
     public LineRenderer slingBack;
     public LineRenderer slingFront;
-    public BoxCollider2D slingBox;
 
     public GameObject ammoPrefab;
     public GameObject ammo;
     public Transform ammoRespawn;
     public SpringJoint2D spring;
     public Rigidbody2D ammoRigid;
+    private float reloadTime;
+    public float reloadRate;
 
     public float ammoCount;
     public float maxAmmo;
@@ -54,6 +55,7 @@ public class PlayerControl : MonoBehaviour {
 
         maxLengthSqr = maxLength * maxLength;
         ammoCount = maxAmmo;
+        reloadTime = 0f;
         Reload();
 
         if (resetVel == 0)
@@ -82,15 +84,19 @@ public class PlayerControl : MonoBehaviour {
 
     private void Update()
     {
+       
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
             OnClick();
-        
+
 
 #else
-            If(Input.GetTouch(0).position)
+            If(Input.GetTouch(0) == TouchPhase.Began)
             OnClick();
 #endif
+
+
+#if UNITY_EDITOR
         if (Input.GetMouseButtonUp(0))
         {
             OnMouseUp();
@@ -99,9 +105,16 @@ public class PlayerControl : MonoBehaviour {
                 trajectDots[i].SetActive(false);
             }
         }
-
-
-
+#else
+        if(Input.GetTouch(0) == TouchPhase.End)
+        {
+            OnMouseUp();
+            for (int i = 0; i < numOfDots; i++)
+            {
+                trajectDots[i].SetActive(false);
+            }
+        }
+#endif
         if (clicked == true)
         {
             Dragging();
@@ -113,8 +126,7 @@ public class PlayerControl : MonoBehaviour {
         LineRendererUpdate();
         if (ammoRigid.isKinematic == false && ammoRigid != null)
         {
-            StartCoroutine(RemoveString());
-           
+            StartCoroutine(RemoveString());  
         }
 
         if (spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr)
@@ -134,20 +146,24 @@ public class PlayerControl : MonoBehaviour {
     public void Launch()
     {
         
-        Debug.LogWarning("initVel: " + initVel);
+        //Debug.LogWarning("initVel: " + initVel);
+
         ammoRigid.velocity = initVel;
 
-       
+        reloadTime = Time.time + reloadRate;
     }
 
     public void Reload()
     {
-        if (ammoCount < 0)
-            return;
+        if (Time.time >= reloadTime)
+        {
+            if (ammoCount < 0)
+                return;
 
-        ammo = (GameObject)Instantiate(ammoPrefab, ammoRespawn.position, Quaternion.identity);
-        ammoCount -= 1;
-        SetAmmo();
+            ammo = (GameObject)Instantiate(ammoPrefab, ammoRespawn.position, Quaternion.identity);
+            ammoCount -= 1;
+            SetAmmo();
+        }
     }
 
     private void SetAmmo()
@@ -174,22 +190,17 @@ public class PlayerControl : MonoBehaviour {
     {
         //Ray ray = Camera.main.ScreenPointToRay(mousePoint);
          
-        RaycastHit2D hit = Physics2D.Raycast(mousePoint, Camera.main.transform.forward);
+        //RaycastHit2D hit = Physics2D.Raycast(mousePoint, Camera.main.transform.forward);
+
+        //Click Detection:
+
+        //if (hit.collider.gameObject.tag == "Ammo")
+        //    Debug.LogWarning("Ammo is Touched: " + hit.collider.gameObject.name);
+
+        //else
+        //    Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
 
 
-
-        //clicked = true;
-        //spring.enabled = false;
-        if (hit.collider.gameObject.name == "Canvas")
-        {
-            
-        }
-                if(hit.collider.gameObject.tag == "Ammo")
-                Debug.LogWarning("Ammo is Touched: " + hit.collider.gameObject.name);
-
-            else
-                Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
-        
         clicked = true;
         spring.enabled = false;
 
@@ -213,6 +224,14 @@ public class PlayerControl : MonoBehaviour {
         Vector2 slingToMouse = mousePoint - slingShot.transform.position;
         angle = Mathf.Atan2(mousePoint.x, mousePoint.y) * Mathf.Rad2Deg;
 
+        //Debug.LogWarning("Angle : " + angle);
+
+       // if (angle >= -115 && angle <= -110 )
+       //if (ammoRespawn.InverseTransformPoint(ammoRigid.transform.position).x < 0 && ammoRespawn.InverseTransformPoint(ammoRigid.transform.position).y < 0 && angle >= -115 && angle <= -113)
+       //{
+       //     Debug.LogWarning("Pointer: " + ammoRespawn.InverseTransformPoint(ammoRigid.transform.position));
+       //     mousePoint = ammoRespawn.transform.position;
+       // }
         //if (angle < 70)
         //{
         //    float angleX = Mathf.Cos(angle) * slingToMouse.magnitude;
@@ -220,8 +239,8 @@ public class PlayerControl : MonoBehaviour {
 
         //    mousePoint = new Vector3(angleX, angleY, 0f);
         //}
-        //for clamping angles
-      //  float mouseAngle = Mathf.Atan2(mousePoint.y, mousePoint.x) * Mathf.Rad2Deg;
+
+
         if (slingToMouse.sqrMagnitude > maxLengthSqr)
         {
             rayToMouse.direction = slingToMouse;
@@ -234,7 +253,7 @@ public class PlayerControl : MonoBehaviour {
         ammoToSling.direction = slingShot.transform.position - ammo.transform.position;
 
        initVel = GetForceFrom(slingTrans.transform.position, ammoRigid.transform.position);
-        Debug.Log("InitVel" + initVel);
+        //Debug.Log("InitVel" + initVel);
        
         DrawTraject(new Vector2(ammoRigid.transform.position.x, ammoRigid.transform.position.y), initVel);
     }
