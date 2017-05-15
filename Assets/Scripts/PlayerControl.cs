@@ -225,13 +225,7 @@ public class PlayerControl : MonoBehaviour {
 
         //    else
         //        Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
-
-
-
-       
     }
-
-   
     
     private void OnMouseUp()
     {
