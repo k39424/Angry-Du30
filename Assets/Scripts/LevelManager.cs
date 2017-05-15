@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public PlayerControl playerControl;
+    public GameObject pauseMenu;
+    public GameObject pausePanel;
 
     public Text enemiesKilledText;
     public Text enemiesToKillText;
@@ -27,6 +29,7 @@ public class LevelManager : MonoBehaviour
     {
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
         ammoCount = playerControl.ammoCount;
+        pausePanel.SetActive(false);
 
         UpdateEnemiesText();
     }
@@ -91,5 +94,12 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
        
         losePanel.SetActive(true);
+    }
+
+    public void TogglePauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        pausePanel.SetActive(!pausePanel.activeSelf);
+        Time.timeScale = (pauseMenu.activeSelf) ? 0 : 1;
     }
 }

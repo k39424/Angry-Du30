@@ -27,4 +27,5 @@ public class LoadSceneOnClick : MonoBehaviour {
             PanelToHide.SetActive(false);
             PanelToShow.SetActive(true);  
     }
+  
 }

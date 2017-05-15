@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour {
     public CameraController cameraController;
     Vector2 initVel;
     private bool clicked;
+    public Collider2D colHit;
 
     private void Awake()
     {
@@ -136,8 +137,9 @@ public class PlayerControl : MonoBehaviour {
     private Vector2 GetForceFrom(Vector2 toPos, Vector2 fromPos)
     {//Get Force From: ToPosition - FromPosition * power
      //return (new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y)) * (new Vector2(ammoToSling.direction.x - ammoToSling.origin.x, ammoToSling.origin.y - ammoToSling.origin.y).magnitude) * 3f/ammoRigid.mass;
-        Vector2 velDir = new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y);
-       
+     //Vector2 velDir = new Vector2(toPos.x, toPos.y) - new Vector2(fromPos.x, fromPos.y);
+        Vector2 velDir = new Vector2(ammoRigid.transform.InverseTransformPoint(slingTrans.transform.position).x, ammoRigid.transform.InverseTransformPoint(slingTrans.transform.position).y);
+        Debug.Log("VelDir " + velDir + " ToPos: " + toPos + " fromPos: " + fromPos + " inv: " + slingShot.transform.InverseTransformPoint(ammo.transform.position).x);
         return (velDir) * slingShot.transform.InverseTransformPoint(ammo.transform.position).magnitude;
        
         
@@ -188,33 +190,64 @@ public class PlayerControl : MonoBehaviour {
 
     private void OnClick()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(mousePoint);
-         
-        //RaycastHit2D hit = Physics2D.Raycast(mousePoint, Camera.main.transform.forward);
+        if (Time.time > reloadTime)
+        {
+            clicked = true;
+            spring.enabled = false;
+        }
+
+        else
+            return;
+
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
+
+            if (hit.collider != null)
+            {
+                Debug.LogWarning("Hit");
+            }
+            else
+                Debug.LogWarning("Not Hit: ");
+        }
+        //if (Physics2D.Raycast(ray.origin, ray.direction, 1000.0f))
+        //{
+        //    if (ray)
+        //      }
+
+
 
         //Click Detection:
 
-        //if (hit.collider.gameObject.tag == "Ammo")
-        //    Debug.LogWarning("Ammo is Touched: " + hit.collider.gameObject.name);
+        //if (hit)
+        //        Debug.LogWarning("Ammo is Touched: " + hit.collider.gameObject.name);
 
-        //else
-        //    Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
+        //    else
+        //        Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
 
 
-        clicked = true;
-        spring.enabled = false;
 
+       
     }
+
+   
+    
     private void OnMouseUp()
     {
-        clicked = false;
+        if (clicked == true)
+        {
+            clicked = false;
 
-        if(spring != null)
-            spring.enabled = true;
+            if (spring != null)
+                spring.enabled = true;
 
-        ammoRigid.isKinematic = false;
-        LineRendererUpdate();
-        StartCoroutine(ReleaseDelay());
+            ammoRigid.isKinematic = false;
+            LineRendererUpdate();
+            StartCoroutine(ReleaseDelay());
+        }
+        else
+            return;
     }
 
     private void Dragging()
@@ -285,7 +318,7 @@ public class PlayerControl : MonoBehaviour {
         {
             Vector2 slingToAmmo = ammo.transform.position - slingFront.transform.position;
             leftSlingToAmmo.direction = slingToAmmo;
-            Vector3 holdPoint = leftSlingToAmmo.GetPoint(slingToAmmo.magnitude + 0.31f);
+            Vector3 holdPoint = leftSlingToAmmo.GetPoint(slingToAmmo.magnitude + 0.78f);
             holdPoint.z = 1;
             slingFront.SetPosition(1, new Vector3(holdPoint.x, holdPoint.y, -1.0f));
             slingBack.SetPosition(1, holdPoint);
