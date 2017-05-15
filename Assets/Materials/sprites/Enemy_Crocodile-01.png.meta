@@ -1,0 +1,224 @@
+fileFormatVersion: 2
+guid: b9117ffadde11704ea15f82eab72a243
+timeCreated: 1494825471
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Enemy_Crocodile-01_0
+    21300002: Enemy_Crocodile-01_1
+    21300004: Enemy_Crocodile-01_2
+    21300006: Enemy_Crocodile-01_3
+    21300008: Enemy_Crocodile-01_4
+    21300010: Enemy_Crocodile-01_5
+    21300012: Enemy_Crocodile-01_6
+    21300014: Enemy_Crocodile-01_7
+    21300016: Enemy_Crocodile-01_8
+    21300018: Enemy_Crocodile-01_9
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_0
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 873
+        width: 223
+        height: 151
+      alignment: 9
+      pivot: {x: 0.87955874, y: 0.7048126}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_1
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 380
+        width: 599
+        height: 547
+      alignment: 9
+      pivot: {x: 0.418478, y: 0.07744686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_2
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 584
+        width: 104
+        height: 143
+      alignment: 9
+      pivot: {x: 0.28088352, y: 0.76180154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_3
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 643
+        width: 113
+        height: 143
+      alignment: 9
+      pivot: {x: 0.3415491, y: 0.7504187}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 483
+        width: 92
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 547
+        width: 92
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_6
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 281
+        width: 102
+        height: 181
+      alignment: 9
+      pivot: {x: 0.3723353, y: 0.9316612}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_7
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 351
+        width: 101
+        height: 177
+      alignment: 9
+      pivot: {x: 0.4677677, y: 0.9046314}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_8
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 34
+        width: 268
+        height: 318
+      alignment: 9
+      pivot: {x: 0.5060735, y: 0.95555747}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Enemy_Crocodile-01_9
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 48
+        width: 271
+        height: 317
+      alignment: 9
+      pivot: {x: 0.5180191, y: 0.95185965}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
