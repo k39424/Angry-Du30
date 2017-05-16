@@ -192,30 +192,30 @@ public class PlayerControl : MonoBehaviour {
     {
         if (Time.time > reloadTime)
         {
-            clicked = true;
-            spring.enabled = false;
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
+
+                if (hit.collider != null && hit.collider.name == "AmmoRange") // or &&hit.collider.tag == "Ammo"
+                {
+                    //Debug.LogWarning("Hit");
+                    clicked = true;
+                    spring.enabled = false;
+                }
+
+                else
+                {
+                    // Debug.LogWarning("Not Hit: ");
+                    //Do Nothing
+                }
+
+            }
+               
         }
 
         else
             return;
-
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
-
-            if (hit.collider != null)
-            {
-                Debug.LogWarning("Hit");
-            }
-            else
-                Debug.LogWarning("Not Hit: ");
-        }
-        //if (Physics2D.Raycast(ray.origin, ray.direction, 1000.0f))
-        //{
-        //    if (ray)
-        //      }
-
 
 
         //Click Detection:
