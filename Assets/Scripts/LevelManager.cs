@@ -100,6 +100,8 @@ public class LevelManager : MonoBehaviour
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         pausePanel.SetActive(!pausePanel.activeSelf);
-        Time.timeScale = (pauseMenu.activeSelf) ? 0 : 1;
+        Time.timeScale = (pauseMenu.activeSelf) ? 1 : 0;
+
+
     }
 }
