@@ -33,6 +33,8 @@ public class PlayerControl : MonoBehaviour {
 
     Vector3 mousePoint;
 
+    public CameraController cameraController;
+
     float swipingResistance = 200f;
 
 
@@ -43,7 +45,7 @@ public class PlayerControl : MonoBehaviour {
 
     public List<GameObject> trajectDots;
     public float numOfDots;
-    public CameraController cameraController;
+   
     Vector2 initVel;
     private bool clicked;
     public Collider2D colHit;
@@ -95,7 +97,7 @@ public class PlayerControl : MonoBehaviour {
 
 
 #else
-            If(Input.GetTouch(0) == TouchPhase.Began)
+            If(Input.GetTouch(0).phase == TouchPhase.Began)
             OnClick();
 #endif
 
@@ -110,7 +112,7 @@ public class PlayerControl : MonoBehaviour {
             }
         }
 #else
-        if(Input.GetTouch(0) == TouchPhase.End)
+        if(Input.GetTouch(0).phase == TouchPhase.End)
         {
             OnMouseUp();
             for (int i = 0; i < numOfDots; i++)
@@ -198,23 +200,33 @@ public class PlayerControl : MonoBehaviour {
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
+                Debug.LogWarning("1");
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
 
-                if (hit.collider != null && hit.collider.name == "AmmoRange") // or &&hit.collider.tag == "Ammo"
+                if (hit.collider != null && hit.collider.name == "AmmoRange")
                 {
-                    //Debug.LogWarning("Hit");
-                    clicked = true;
-                    spring.enabled = false;
-                }
+                    Debug.LogWarning("2");
+                    if (GameObject.Find("AmmoRange").GetComponent<Collider2D>().bounds.Contains(GameObject.FindWithTag("Ammo").transform.position))
+                    {
+                        Debug.LogWarning("3");
+                        cameraController.ammoIsClicked = true;
+                        //Debug.LogWarning("Hit");
+                        LineRendererUpdate();
+                        clicked = true;
+                        spring.enabled = false;
+                        Dragging();
+                    }
 
-                else
-                {
-                 //camera Control
-               
-                    // Debug.LogWarning("Not Hit: ");
-                    //Do Nothing
-                }
+                    else
+                    {
+                        Debug.LogWarning("else");
+                        //camera Control
 
+                        // Debug.LogWarning("Not Hit: ");
+                        //Do Nothing
+                    }
+
+                }
             }
                
         }
@@ -237,7 +249,7 @@ public class PlayerControl : MonoBehaviour {
         if (clicked == true)
         {
             clicked = false;
-
+            cameraController.ammoIsClicked = false;
             if (spring != null)
                 spring.enabled = true;
 
@@ -252,7 +264,7 @@ public class PlayerControl : MonoBehaviour {
     private void Dragging()
     {//have to clamp angles
         
-       mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+       mousePoint = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
         Vector2 slingToMouse = mousePoint - slingShot.transform.position;
         angle = Mathf.Atan2(mousePoint.x, mousePoint.y) * Mathf.Rad2Deg;
 
