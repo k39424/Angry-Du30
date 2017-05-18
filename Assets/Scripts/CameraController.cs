@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+
 public class CameraController : MonoBehaviour {
 
     public PlayerControl playerControl;
@@ -31,6 +31,9 @@ public class CameraController : MonoBehaviour {
 
     private Vector2 touchDeltaPosition;
 
+    public float perspectiveZoomSpeed = 0.5f;
+    public float orthoZoomSpeed = 0.5f;
+
 
 
     private void Start()
@@ -47,6 +50,14 @@ public class CameraController : MonoBehaviour {
 
     private void Update()
     {
+        if (Input.touchCount < 0)
+        {
+            speed = 0f;
+        }
+
+        if (Time.timeScale == 0)
+            return;
+
         if (Input.touchCount == 1)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
@@ -63,11 +74,24 @@ public class CameraController : MonoBehaviour {
 
                 if (ammoIsClicked == false && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
+                    speed = 0.05f;
                     // touchPosition += Input.GetTouch(0).position;
                     touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
                     Debug.Log("left: " + leftBound.transform.position.x + "rightBound: " + rightBound.transform.position.x);
+                    ammoIsClicked = false;
 
+                    transform.Translate(-touchDeltaPosition.x * speed, minY, 0);
+                    if (transform.position.x < leftBound.transform.position.x)
+                    {
+                        transform.position = new Vector3(Mathf.Lerp(transform.position.x, leftBound.transform.position.x, Time.deltaTime), 0f);
+
+                    }
+                    else if (transform.position.x > rightBound.transform.position.x)
+                    {
+                        transform.position = new Vector3(Mathf.Lerp(rightBound.transform.position.x, transform.position.x, Time.deltaTime), 0f);
+
+                    }
                     //touchDeltaPosition.x = Mathf.Clamp(transform.position.x, leftBound.position.x, rightBound.position.x);
 
                     //if (transform.position.x < leftBound.transform.position.x)
@@ -80,22 +104,43 @@ public class CameraController : MonoBehaviour {
                     //    touchDeltaPosition.x = rightBound.transform.position.x;
 
                     //}
-                   //transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x),0f,-10f);
-                   //// if(transform.position.x > leftBound.transform.position.x && transform.position.x < rightBound.transform.position.x)
-                        //transform.Translate(-touchDeltaPosition.x * speed, minY, 0);
+                    //transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x),0f,-10f);
+                    //// if(transform.position.x > leftBound.transform.position.x && transform.position.x < rightBound.transform.position.x)
+                    //transform.Translate(-touchDeltaPosition.x * speed, minY, 0);
 
-                    
+
 
                     // Vector2 pos = Vector2.Lerp((Vector2) transform.position, (Vector2)target.transform.position, Time.fixedDeltaTime)
                     Debug.Log("val: " + touchDeltaPosition.x);
                 }
+                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    speed = 0;
+                }
+
 
             }
         }
-        else if (Input.touchCount == 2)
+        else if (Input.touchCount == 2)//zoom
         {
-            //Vector2 touchOne = Input.GetTouch(0).position;
-            //Vector2 touchTwo = Input.GetTouch(1).position;
+
+            Touch touchZero= Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevTouchMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+            float deltaMagnitudeDiff = prevTouchMag - touchDeltaMag;
+
+            Camera.main.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
+
+            Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize, 5f);
+            Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize, 25f);
+
+
 
             //float lastTouchMag = touchOne.x - touchTwo.x;
 
@@ -106,8 +151,10 @@ public class CameraController : MonoBehaviour {
     private void LateUpdate()
     {
         // transform.position = new Vector3(touchPosition.x* speed * Time.deltaTime, 0f, -10f);
+        // transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), 0f, -10f);
         transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), 0f, -10f);
-        transform.Translate(-touchDeltaPosition.x * speed, minY, 0);
+
+        
 
     }
 
@@ -115,10 +162,10 @@ public class CameraController : MonoBehaviour {
     //{
     //      if(target != null && spring == null) 
     //      {
-            
+
     //        Vector3 newPosition = transform.position;
     //        newPosition.x = target.transform.position.x;
-            
+
     //        newPosition.x = Mathf.Clamp(newPosition.x, leftBound.position.x, rightBound.position.x);
     //        transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
     //        transform.position = newPosition;
