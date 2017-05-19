@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour {
     private float distance = -10.0f;
     private float sensitivityX = 0.0f;
     private float sensitivityY = 0.0f;
-    public float speed = 0.05f;
+    public float speed = 0.2f;
     private Vector2 touchPosition;
 
     public bool ammoIsClicked;
@@ -74,7 +74,7 @@ public class CameraController : MonoBehaviour {
 
                 if (ammoIsClicked == false && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
-                    speed = 0.05f;
+                    speed = 0.5f;
                     // touchPosition += Input.GetTouch(0).position;
                     touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
@@ -84,12 +84,12 @@ public class CameraController : MonoBehaviour {
                     transform.Translate(-touchDeltaPosition.x * speed, minY, 0);
                     if (transform.position.x < leftBound.transform.position.x)
                     {
-                        transform.position = new Vector3(Mathf.Lerp(transform.position.x, leftBound.transform.position.x, Time.deltaTime), 0f);
+                        transform.position = new Vector3(Mathf.Lerp(transform.position.x, leftBound.transform.position.x, Time.deltaTime), minY);
 
                     }
                     else if (transform.position.x > rightBound.transform.position.x)
                     {
-                        transform.position = new Vector3(Mathf.Lerp(rightBound.transform.position.x, transform.position.x, Time.deltaTime), 0f);
+                        transform.position = new Vector3(Mathf.Lerp(rightBound.transform.position.x, transform.position.x, Time.deltaTime), minY);
 
                     }
                     //touchDeltaPosition.x = Mathf.Clamp(transform.position.x, leftBound.position.x, rightBound.position.x);
@@ -140,7 +140,10 @@ public class CameraController : MonoBehaviour {
             Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize, 5f);
             Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize, 25f);
 
-
+            minY = Mathf.Min(minY, -12.3f);
+            minY = Mathf.Max(minY, 2.8f);
+            minY -= 1f;
+            Camera.main.transform.position = new Vector3(transform.position.x, minY, 0f);
 
             //float lastTouchMag = touchOne.x - touchTwo.x;
 
@@ -152,7 +155,7 @@ public class CameraController : MonoBehaviour {
     {
         // transform.position = new Vector3(touchPosition.x* speed * Time.deltaTime, 0f, -10f);
         // transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), 0f, -10f);
-        transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), 0f, -10f);
+        transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), minY, -10f);
 
         
 
