@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour {
     private float reloadTime;
     public float reloadRate;
 
-    public float ammoCount;
+    private float ammoCount;
     public float maxAmmo;
     public float maxLength;
     public float maxLengthSqr;
@@ -34,6 +34,7 @@ public class PlayerControl : MonoBehaviour {
     Vector3 mousePoint;
 
     public CameraController cameraController;
+    public LevelManager levelManager;
 
     float swipingResistance = 200f;
 
@@ -60,12 +61,13 @@ public class PlayerControl : MonoBehaviour {
         //getComponentInchildren doesnt work, so I edited its value in editor
 
         myRigid = GetComponent<Rigidbody2D>();
-
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         maxLengthSqr = maxLength * maxLength;
         ammoCount = maxAmmo;
         reloadTime = 0f;
         Reload();
 
+        levelManager.UpdateAmmo(ammoCount);
         if (resetVel == 0)
             resetVel = 0.3f;
 
@@ -93,6 +95,7 @@ public class PlayerControl : MonoBehaviour {
     private void Update()
     {
        
+
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
             OnClick();
@@ -141,7 +144,10 @@ public class PlayerControl : MonoBehaviour {
 
         }
 
-        if (spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr)
+        if (Time.time < reloadTime)
+            return;
+
+            if (ammo == null && ammoCount > 0 || spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr )
             Reload();
     }
 
@@ -175,6 +181,7 @@ public class PlayerControl : MonoBehaviour {
 
             ammo = (GameObject)Instantiate(ammoPrefab, ammoRespawn.position, Quaternion.identity);
             ammoCount -= 1;
+            levelManager.UpdateAmmo(ammoCount);
             SetAmmo();
         }
     }
@@ -201,57 +208,42 @@ public class PlayerControl : MonoBehaviour {
 
     private void OnClick()
     {
-        if (Time.timeScale == 0)
-            return;
+        if (ammoCount < 0 || Time.timeScale == 0) return;
 
-        if (Time.time > reloadTime)
+        if (Time.time > reloadTime && (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+          
+            Debug.LogWarning("1");
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
+
+            if (hit.collider != null && hit.collider.name == "AmmoRange" && ammoRigid != null)
             {
-                Debug.LogWarning("1");
-                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
+                Debug.LogWarning("2");
+                if (spring == null)
+                    SetAmmo();
 
-                if (hit.collider != null && hit.collider.name == "AmmoRange")
-                {
-                    Debug.LogWarning("2");
-                    if (ammoRigid != null && GameObject.Find("AmmoRange").GetComponent<Collider2D>().bounds.Contains(GameObject.FindWithTag("Ammo").transform.position))
-                    {
-                        Debug.LogWarning("3");
-                        cameraController.ammoIsClicked = true;
-                        //Debug.LogWarning("Hit");
-                        LineRendererUpdate();
-                        clicked = true;
-                        anim.SetTrigger("isAiming");
-                        spring.enabled = false;
-                        Dragging();
-                    }
+                Debug.LogWarning("Ammo: "+ammoCount.ToString());
+                Debug.LogWarning("3");
 
-                    else
-                    {
-                        Debug.LogWarning("else");
-                        //camera Control
-
-                        // Debug.LogWarning("Not Hit: ");
-                        //Do Nothing
-                    }
-
-                }
+                cameraController.ammoIsClicked = true;
+                //Debug.LogWarning("Hit");
+                LineRendererUpdate();
+                clicked = true;
+                anim.SetTrigger("isAiming");
+                spring.enabled = false;
+                Dragging();
             }
-               
         }
 
         else
+        {
+            float remainingTime = 0f;
+            remainingTime =  reloadTime - Time.time;
+            Debug.LogWarning(remainingTime.ToString());
             return;
-
-
-        //Click Detection:
-
-        //if (hit)
-        //        Debug.LogWarning("Ammo is Touched: " + hit.collider.gameObject.name);
-
-        //    else
-        //        Debug.LogWarning("Ammo is not Touched: " + hit.collider.gameObject.name);
+        }
+        return;
     }
     
     private void OnMouseUp()

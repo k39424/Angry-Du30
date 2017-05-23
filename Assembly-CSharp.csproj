@@ -52,12 +52,15 @@
      <Compile Include="Assets\Scripts\EndBox.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\EnemyProperties.cs" />
      <Compile Include="Assets\Scripts\GameCanvas.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Settings.cs" />
      <Compile Include="Assets\Scripts\SlingBody.cs" />
+     <Compile Include="Assets\Scripts\VolumeAdjustment.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>D:/Unity/Projects/D-30 Project/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
