@@ -28,13 +28,13 @@ public class CameraController : MonoBehaviour {
     public float smoothing = 0.5f;
     public float minY;
 
-    private float currentX = 0.0f;
-    private float currentY = 0.0f;
-    private float distance = -10.0f;
-    private float sensitivityX = 0.0f;
-    private float sensitivityY = 0.0f;
+    //private float currentX = 0.0f;
+    //private float currentY = 0.0f;
+    //private float distance = -10.0f;
+    //private float sensitivityX = 0.0f;
+    //private float sensitivityY = 0.0f;
     public float speed = 0.2f;
-    private Vector2 touchPosition;
+    //private Vector2 touchPosition;
 
     public bool ammoIsClicked;
 
@@ -66,8 +66,10 @@ public class CameraController : MonoBehaviour {
         
         //If player removes touch we will set speed of camera movement to zero
         if (Input.touchCount < 0) speed = 0f;
+
         //if paused then return
         if (Time.timeScale == 0)return;
+
         //if player touches the screen with one finger
         if (Input.touchCount == 1)
         {
@@ -98,7 +100,6 @@ public class CameraController : MonoBehaviour {
                     else if (transform.position.x > rightBound.transform.position.x)
                     {
                         transform.position = new Vector3(Mathf.Lerp(rightBound.transform.position.x, transform.position.x, Time.deltaTime), minY);
-
                     }
                     //touchDeltaPosition.x = Mathf.Clamp(transform.position.x, leftBound.position.x, rightBound.position.x);
 
@@ -168,7 +169,10 @@ public class CameraController : MonoBehaviour {
             }
             //float lastTouchMag = touchOne.x - touchTwo.x;
 
-           
+            if (rigid.velocity.magnitude > 0f && rigid.isKinematic == false && target != null)
+            {
+                FocusOnAmmo();
+            }
 
         }
     }
@@ -187,26 +191,27 @@ public class CameraController : MonoBehaviour {
 
     }
 
-    //private void FocusOnAmmo()
-    //{
-    //      if(target != null && spring == null) 
-    //      {
+    private void FocusOnAmmo()
+    {
+        if (target != null && spring == null)
+        {
 
-    //        Vector3 newPosition = transform.position;
-    //        newPosition.x = target.transform.position.x;
+            Vector3 newPosition = transform.position;
+            newPosition.x = target.transform.position.x;
 
-    //        newPosition.x = Mathf.Clamp(newPosition.x, leftBound.position.x, rightBound.position.x);
-    //        transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
-    //        transform.position = newPosition;
-    //        if (transform.position.y < minY)
-    //        {
-    //            transform.position = new Vector3(transform.position.x, minY, -10f);
-    //        }
-    //       }
-    //}
+            newPosition.x = Mathf.Clamp(newPosition.x, leftBound.position.x, rightBound.position.x);
+            transform.position = Vector3.Lerp(transform.position, newPosition, smoothing * Time.deltaTime);
+            transform.position = newPosition;
+            if (transform.position.y < minY)
+            {
+                transform.position = new Vector3(transform.position.x, minY, -10f);
+            }
+        }
+    }
 
     public void SetTarget(GameObject ammo)
     {
+       
         target = ammo;
         spring = target.GetComponent<SpringJoint2D>();
         rigid = target.GetComponent<Rigidbody2D>();

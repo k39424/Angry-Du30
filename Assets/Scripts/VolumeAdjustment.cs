@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class VolumeAdjustment : MonoBehaviour {
 
     public Slider volumeeAdjuster;
-    public AudioSource audioS;
+    public AudioSource audioSource;
 
     public void VolumeAdjust()
     {
-        audioS.volume = volumeeAdjuster.value;
+        audioSource.volume = volumeeAdjuster.value;
     }
 }

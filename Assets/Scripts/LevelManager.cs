@@ -32,6 +32,11 @@ public class LevelManager : MonoBehaviour
     public float crocNum;
     public float criminalsToKill;
     public float crocsToKill;
+    [Space]
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip bgm;
+
    
     public void Start()
     {
@@ -39,12 +44,16 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 1;
 
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
+        audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        GetComponent<AudioSource>();
         
         pausePanel.SetActive(false);
 
 
         crocsToKillText.text = crocsToKill.ToString();
         criminalsToKillText.text = criminalsToKill.ToString();
+
+        audioSource.PlayOneShot(bgm);
     }
 
     public void Update()

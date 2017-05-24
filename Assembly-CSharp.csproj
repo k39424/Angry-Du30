@@ -46,8 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AirplaneScript.cs" />
      <Compile Include="Assets\Scripts\AmmoLifeTime.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\CivilianController.cs" />
      <Compile Include="Assets\Scripts\DrawTrajectory.cs" />
      <Compile Include="Assets\Scripts\EndBox.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />

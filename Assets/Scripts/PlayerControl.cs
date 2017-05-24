@@ -36,9 +36,6 @@ public class PlayerControl : MonoBehaviour {
     public CameraController cameraController;
     public LevelManager levelManager;
 
-    float swipingResistance = 200f;
-
-
     //private Vector2 startPos;
     private Ray ammoToSling;
     
