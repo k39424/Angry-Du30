@@ -11,6 +11,9 @@ public class CameraController : MonoBehaviour {
     [Header("Boundaries")]
     public Transform leftBound;
     public Transform rightBound;
+    public Transform smallCamLeftBound;
+    public Transform smallCamRightBound;
+
     [Space]
     [Header("Reset Velocity")]
     public float resetVel;
@@ -35,24 +38,32 @@ public class CameraController : MonoBehaviour {
 
     public bool ammoIsClicked;
 
-    public GameObject cam;
-
     private Vector2 touchDeltaPosition;
 
     public float perspectiveZoomSpeed = 0.5f;
     public float orthoZoomSpeed = 0.5f;
+    public float TIME_BEFORE_START = 2f;
 
-
+    [SerializeField]
+    public Vector2 camPosAfterStart;
 
     private void Start()
     {
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
         resetVelSqr = resetVel * resetVel;
         ammoIsClicked = false;
+
+    
     }
 
     private void Update()
     {
+        //if (Time.time < TIME_BEFORE_START && transform.position != leftBound.transform.position)
+        //{
+        //    transform.position = Vector2.Lerp(transform.position, leftBound.transform.position, 0.2f * Time.deltaTime);
+        //}
+    
+        
         //If player removes touch we will set speed of camera movement to zero
         if (Input.touchCount < 0) speed = 0f;
         //if paused then return
@@ -76,7 +87,6 @@ public class CameraController : MonoBehaviour {
                     // touchPosition += Input.GetTouch(0).position;
                     touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
-                    Debug.Log("left: " + leftBound.transform.position.x + "rightBound: " + rightBound.transform.position.x);
                     ammoIsClicked = false;
 
                     transform.Translate(-touchDeltaPosition.x * speed, minY, 0);
@@ -135,17 +145,30 @@ public class CameraController : MonoBehaviour {
 
             Camera.main.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
 
-            Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize, 5f);
-            Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize, 25f);
+            Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize, 13f);
+            Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize, 17f);
 
-            minY = Mathf.Min(minY, -12.3f);
-            minY = Mathf.Max(minY, 2.8f);
-            minY -= 1f;
-            Camera.main.transform.position = new Vector3(transform.position.x, minY, 0f);
+            //minY =  Mathf.Lerp(2.8f, -12, 0.2f * Time.deltaTime);
+            // Camera.main.transform.position = new Vector3(transform.position.x, minY, -10f);
 
+            Vector2 nextPos = new Vector2(transform.position.x, minY);
+         
+
+            if (Camera.main.orthographicSize < 15f)//zoom in
+            {
+                minY = Mathf.Lerp(minY, -7.5f, 9f * Time.deltaTime);
+               // minY = -13f;
+                transform.position = Vector2.Lerp(transform.position, nextPos, 9f * Time.deltaTime);
+            }
+            else
+            {
+               minY = Mathf.Lerp(minY, -5.3f, 9f * Time.deltaTime);//zoom out
+               // minY = 2.8f;
+                transform.position = Vector2.Lerp(transform.position, nextPos, 9f * Time.deltaTime);
+            }
             //float lastTouchMag = touchOne.x - touchTwo.x;
 
-
+           
 
         }
     }
@@ -153,9 +176,14 @@ public class CameraController : MonoBehaviour {
     {
         // transform.position = new Vector3(touchPosition.x* speed * Time.deltaTime, 0f, -10f);
         // transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), 0f, -10f);
-        transform.position = new Vector3(Mathf.Clamp(cam.transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), minY, -10f);
+       
+        if (Camera.main.orthographicSize < 12f)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, smallCamLeftBound.transform.position.x, smallCamRightBound.transform.position.x), minY, -10f);
+            return;
+        }
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftBound.transform.position.x, rightBound.transform.position.x), minY, -10f);
 
-        
 
     }
 
@@ -185,5 +213,7 @@ public class CameraController : MonoBehaviour {
 
        // transform.position = new Vector3 (target.transform.position.x, minY, -10f);
     }
+    
+   
 
 }
