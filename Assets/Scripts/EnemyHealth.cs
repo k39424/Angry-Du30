@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
+    [Header("Pre-Defined Values:")]
     public float maxHealth;
     public float currentHealth;
     public LevelManager levelManager;
@@ -9,7 +10,6 @@ public class EnemyHealth : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip hurtFX;
     public AudioClip deathFX;
-    public float resist = 50f;
 
     public float damage;
     
@@ -36,7 +36,6 @@ public class EnemyHealth : MonoBehaviour {
             DamageHealth(1f);
   
             audioSource.clip = hurtFX;
-            Debug.LogWarning("other: "+other.gameObject.name);
                audioSource.PlayOneShot(hurtFX);
         }
     }
@@ -45,7 +44,7 @@ public class EnemyHealth : MonoBehaviour {
 
     private void Update() {
         if (currentHealth <= 0) {
-            levelManager.UpdateEnemyKilled(enemyType, 1f);
+            
             Dead();
         }
     }
@@ -60,6 +59,11 @@ public class EnemyHealth : MonoBehaviour {
             }
             
         Destroy(gameObject,1f);
-     
+    }
+
+    private void OnDestroy()
+    {
+        if(gameObject.tag == "Enemy" && currentHealth <= 0)
+            levelManager.UpdateEnemyKilled(enemyType, 1f);
     }
 }

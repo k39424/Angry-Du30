@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Ammo")
+        if(other.gameObject.tag == "Ammo" && myRigid != null)
         {
             myRigid.velocity = Vector3.zero;
         }
