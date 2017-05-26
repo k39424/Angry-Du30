@@ -63,7 +63,13 @@ public class EnemyHealth : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(gameObject.tag == "Enemy" && currentHealth <= 0)
-            levelManager.UpdateEnemyKilled(enemyType, 1f);
+        try
+        {
+            if (gameObject.tag == "Enemy" && currentHealth <= 0)
+                levelManager.UpdateEnemyKilled(enemyType, 1f);
+        }
+        catch {
+
+        }
     }
 }
