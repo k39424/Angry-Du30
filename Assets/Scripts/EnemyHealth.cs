@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour {
     public float maxHealth;
     public float currentHealth;
     public LevelManager levelManager;
+    public string enemyType;
 
     public float damage;
     
@@ -37,7 +38,8 @@ public class EnemyHealth : MonoBehaviour {
 
     public void Dead()
     {
-        levelManager.EnemiesKilledCounter();
+        //levelManager.EnemiesKilledCounter();
+        levelManager.UpdateEnemyKilled(enemyType, 1f);
         Destroy(gameObject);
     }
 }

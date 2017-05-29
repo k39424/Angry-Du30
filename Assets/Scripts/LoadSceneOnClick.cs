@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour {
 
-    // Use this for initialization
+   //For loading scenes
     public int sceneToLoad;
+
+    //For Panel showing and hiding
     public GameObject PanelToShow;
     public GameObject PanelToHide;
+
 	
     public void LoadScene() {
         SceneManager.LoadScene(sceneToLoad);
@@ -27,5 +30,4 @@ public class LoadSceneOnClick : MonoBehaviour {
             PanelToHide.SetActive(false);
             PanelToShow.SetActive(true);  
     }
-  
 }

@@ -3,19 +3,27 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+    [Header("Player")]
     public PlayerControl playerControl;
     public GameObject target;
+
+    [Space]
+    [Header("Boundaries")]
     public Transform leftBound;
     public Transform rightBound;
+    [Space]
+    [Header("Reset Velocity")]
     public float resetVel;
     public float resetVelSqr;
   //  public float targetsVel;
     public Rigidbody2D rigid;
     public SpringJoint2D spring;
     public float focusVel;
+
+    [Space]
+    [Header("Camera")]
     public float smoothing = 0.5f;
     public float minY;
-    public float swipeResistance = 200f;
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -38,40 +46,30 @@ public class CameraController : MonoBehaviour {
 
     private void Start()
     {
-        
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
         resetVelSqr = resetVel * resetVel;
         ammoIsClicked = false;
     }
-    //private void FixedUpdate()
-    //{
-    //    FocusOnAmmo();
-    //}
 
     private void Update()
     {
-        if (Input.touchCount < 0)
-        {
-            speed = 0f;
-        }
-
-        if (Time.timeScale == 0)
-            return;
-
+        //If player removes touch we will set speed of camera movement to zero
+        if (Input.touchCount < 0) speed = 0f;
+        //if paused then return
+        if (Time.timeScale == 0)return;
+        //if player touches the screen with one finger
         if (Input.touchCount == 1)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint((Input.GetTouch(0).position)), Vector2.zero);
-            
+            //if the player touches ammoRange, set camera speed to zero
             if (hit.collider != null && hit.collider.name == "AmmoRange") // or &&hit.collider.tag == "Ammo"
             {
-                //do nothing
+                speed = 0f;
             }
 
             else
             {
-                //camera Control
-                //Do Nothing
-
+               //if not then we will move camera by his swipe
                 if (ammoIsClicked == false && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
                     speed = 0.5f;

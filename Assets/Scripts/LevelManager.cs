@@ -2,119 +2,133 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 public class LevelManager : MonoBehaviour
 {
+    // public float enemiesToKill;
 
-   // public float respawnRate;
-   // public float nextRespawn;
-    //public Transform[] respawnPoint;
-    public GameObject enemies;
-    public int rndVal;
-    public float enemiesToKill;
-    public float enemiesKilled;
+    [Header("Player")]
+    public PlayerControl playerControl;
     public float ammoCount = 1;
+
+    [Space]
+    [Header("UI")]
     public GameObject winPanel;
     public GameObject losePanel;
-    public PlayerControl playerControl;
     public GameObject pauseMenu;
     public GameObject pausePanel;
+    [Space]
+    [Header("UI-Objectives")]
+    public Text criminalNumText;
+    public Text crocNumText;
+    public Text crocsToKillText;
+    public Text criminalsToKillText;
+    public GameObject inCanvas;
 
-    public Text enemiesKilledText;
-    public Text enemiesToKillText;
-
-    public float secondsToWait =.1f;
-
-
+    [Space]
+    public float criminalNum;
+    public float crocNum;
+    public float criminalsToKill;
+    public float crocsToKill;
+   
     public void Start()
     {
         if (Time.timeScale == 0)
             Time.timeScale = 1;
 
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
-        ammoCount = playerControl.ammoCount;
+        
         pausePanel.SetActive(false);
 
-        UpdateEnemiesText();
+
+        crocsToKillText.text = crocsToKill.ToString();
+        criminalsToKillText.text = criminalsToKill.ToString();
     }
 
     public void Update()
     {
-        //if (Time.time > nextRespawn)
-        //{
-        //    nextRespawn += respawnRate;
-        //    rndVal = Random.Range(0, 2);
-        //    Instantiate(enemies, respawnPoint[rndVal].position, transform.rotation);
-        //}
-
-        if (enemiesKilled >= enemiesToKill)
+        
+        //Check if the objectives are met
+        if (criminalNum >= criminalsToKill && crocNum >= crocsToKill)
         {
-          
             YouWin();
         }
 
-        else if (ammoCount <= 0 && enemiesKilled < enemiesToKill && Time.time > 0f)
+        //Check if player has no ammo but the enemies are still alive
+        else if (ammoCount <= 0 && (criminalNum < criminalsToKill || crocNum < crocsToKill && Time.time > 0f))
         {
-            
             YouLose();
         }
+
     }
 
     public void YouWin()
     {
         playerControl.enabled = false;
-        StartCoroutine(IEYouWin());
+        HideUI();
+        winPanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void YouLose()
     {
         playerControl.enabled = false;
-        StartCoroutine(IEYouLose());
-    }
-
-    public void EnemiesKilledCounter()
-    {
-        enemiesKilled += 1;
-        UpdateEnemiesText();
-        
-    }
-
-    public void UpdateEnemiesText()
-    {
-        enemiesKilledText.text = enemiesKilled.ToString();
-        enemiesToKillText.text = enemiesToKill.ToString();
-    }
-    
-    private IEnumerator IEYouWin()
-    {
-        yield return new WaitForSeconds(secondsToWait);
-        Time.timeScale = 0;
-        winPanel.SetActive(true);
-    }
-
-    public IEnumerator IEYouLose()
-    {
-        yield return new WaitForSeconds(secondsToWait);
-        Time.timeScale = 0;
-       
+        HideUI();
         losePanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
+    //Update number of killed enemies by getting its EnemyType and incrementing criminalNum
+    public void UpdateEnemyKilled(string enemyType, float killedNumber)
+    {
+        
+        if (enemyType == "Criminal")
+        {
+            criminalNum += killedNumber;
+            criminalNumText.text = criminalNum.ToString();
+
+            return;
+        }
+
+        crocNum += killedNumber;
+        crocNumText.text = crocNum.ToString();   
+    }
+
+    // Pause Button
     public void TogglePauseMenu()
     {
+        if (Time.timeScale == 0) return;
+
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         pausePanel.SetActive(!pausePanel.activeSelf);
         Time.timeScale = (pauseMenu.activeSelf) ? 1 : 0;
     }
 
+    //Retry Button
     public void RetryButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
+    //Main Menu Button
     public void MainMenuButton()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    //Hide UI on Win or Lose
+    public void HideUI()
+    {
+        foreach( Transform t in inCanvas.transform)
+        {
+            t.gameObject.SetActive(false);
+        }
+    }
+    public void UpdateAmmo(float ammo)
+    {
+        ammoCount = ammo;
     }
 }
