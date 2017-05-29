@@ -1,0 +1,406 @@
+fileFormatVersion: 2
+guid: d93f9d7b88313f541ab409a332cfb9db
+timeCreated: 1495085767
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Civilians-01_0
+    21300002: Civilians-01_1
+    21300004: Civilians-01_2
+    21300006: Civilians-01_3
+    21300008: Civilians-01_4
+    21300010: Civilians-01_5
+    21300012: Civilians-01_6
+    21300014: Civilians-01_7
+    21300016: Civilians-01_8
+    21300018: Civilians-01_9
+    21300020: Civilians-01_10
+    21300022: Civilians-01_11
+    21300024: Civilians-01_12
+    21300026: Civilians-01_13
+    21300028: Civilians-01_14
+    21300030: Civilians-01_15
+    21300032: Civilians-01_16
+    21300034: Civilians-01_17
+    21300036: Civilians-01_18
+    21300038: Civilians-01_19
+    21300040: Civilians-01_20
+    21300042: Civilians-01_21
+    21300044: Civilians-01_22
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Civilians-01_0
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 235
+        width: 173
+        height: 427
+      alignment: 9
+      pivot: {x: 0.4921621, y: 0.06496721}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_1
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 642
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_2
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 642
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_3
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 588
+        width: 33
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_4
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 596
+        width: 29
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_5
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 423
+        width: 36
+        height: 129
+      alignment: 9
+      pivot: {x: 0.4623345, y: 0.92043525}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_6
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 424
+        width: 36
+        height: 129
+      alignment: 9
+      pivot: {x: 0.4999983, y: 0.9309465}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_7
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 537
+        width: 60
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_8
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 480
+        width: 60
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_9
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 367
+        width: 29
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_10
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 367
+        width: 29
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_11
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 264
+        width: 23
+        height: 142
+      alignment: 9
+      pivot: {x: 0.558952, y: 0.93923694}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_12
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 261
+        width: 23
+        height: 142
+      alignment: 9
+      pivot: {x: 0.558952, y: 0.958334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_13
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 175
+        width: 36
+        height: 171
+      alignment: 9
+      pivot: {x: 0.42467076, y: 0.97575617}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_14
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 175
+        width: 39
+        height: 171
+      alignment: 9
+      pivot: {x: 0.46523187, y: 0.94403917}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_15
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 229
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_16
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 231
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_17
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 107
+        width: 30
+        height: 36
+      alignment: 9
+      pivot: {x: 0.45480144, y: 0.9143045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_18
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 115
+        width: 30
+        height: 36
+      alignment: 9
+      pivot: {x: 0.5, y: 1.027298}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_19
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 76
+        width: 17
+        height: 136
+      alignment: 9
+      pivot: {x: 0.4202378, y: 0.9586148}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_20
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 75
+        width: 17
+        height: 136
+      alignment: 9
+      pivot: {x: 0.49999642, y: 0.9486452}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_21
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 40
+        width: 51
+        height: 25
+      alignment: 9
+      pivot: {x: 0.8987953, y: 0.98812777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Civilians-01_22
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 40
+        width: 52
+        height: 25
+      alignment: 9
+      pivot: {x: 0.16102365, y: 0.8796553}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

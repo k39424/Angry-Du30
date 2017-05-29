@@ -130,9 +130,13 @@ public class PlayerControl : MonoBehaviour {
 
 
         LineRendererUpdate();
-        if (ammoRigid.isKinematic == false && ammoRigid != null)
+        if (ammoRigid != null && ammoRigid.isKinematic == false )
         {
-            StartCoroutine(RemoveString());  
+            StartCoroutine(RemoveString());
+        }
+        else
+        {
+
         }
 
         if (spring == null && ammoRigid.velocity.sqrMagnitude < resetVelSqr)
@@ -195,6 +199,9 @@ public class PlayerControl : MonoBehaviour {
 
     private void OnClick()
     {
+        if (Time.timeScale == 0)
+            return;
+
         if (Time.time > reloadTime)
         {
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -206,7 +213,7 @@ public class PlayerControl : MonoBehaviour {
                 if (hit.collider != null && hit.collider.name == "AmmoRange")
                 {
                     Debug.LogWarning("2");
-                    if (GameObject.Find("AmmoRange").GetComponent<Collider2D>().bounds.Contains(GameObject.FindWithTag("Ammo").transform.position))
+                    if (ammoRigid != null && GameObject.Find("AmmoRange").GetComponent<Collider2D>().bounds.Contains(GameObject.FindWithTag("Ammo").transform.position))
                     {
                         Debug.LogWarning("3");
                         cameraController.ammoIsClicked = true;

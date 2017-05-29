@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -27,6 +29,9 @@ public class LevelManager : MonoBehaviour
 
     public void Start()
     {
+        if (Time.timeScale == 0)
+            Time.timeScale = 1;
+
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
         ammoCount = playerControl.ammoCount;
         pausePanel.SetActive(false);
@@ -101,7 +106,15 @@ public class LevelManager : MonoBehaviour
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         pausePanel.SetActive(!pausePanel.activeSelf);
         Time.timeScale = (pauseMenu.activeSelf) ? 1 : 0;
+    }
 
+    public void RetryButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
