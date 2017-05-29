@@ -14,17 +14,34 @@ public class CameraController : MonoBehaviour {
     public float focusVel;
     public float smoothing = 0.5f;
     public float minY;
+    public float swipeResistance = 200f;
 
-
+    private float currentX = 0.0f;
+    private float currentY = 0.0f;
+    private float distance = -10.0f;
+    private float sensitivityX = 0.0f;
+    private float sensitivityY = 0.0f;
+    private float speed = 5.0f;
     private void Start()
     {
         resetVelSqr = resetVel * resetVel;
     }
-    private void FixedUpdate()
-    {
-        FocusOnAmmo();
-    }
+    //private void FixedUpdate()
+    //{
+    //    FocusOnAmmo();
+    //}
 
+    private void Update()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            // Get movement of the finger since last frame
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+
+            // Move object across XY plane
+            transform.Translate(-touchDeltaPosition.x * speed, -touchDeltaPosition.y * speed, 0);
+        }
+    }
 
     private void FocusOnAmmo()
     {
@@ -51,6 +68,8 @@ public class CameraController : MonoBehaviour {
         rigid = target.GetComponent<Rigidbody2D>();
 
         transform.position = new Vector3 (target.transform.position.x, minY, -10f);
+
+
     }
 
 }

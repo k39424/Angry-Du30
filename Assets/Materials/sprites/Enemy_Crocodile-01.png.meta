@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b9117ffadde11704ea15f82eab72a243
-timeCreated: 1494825471
+timeCreated: 1494910690
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -157,7 +157,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 547
+        y: 546
         width: 92
         height: 83
       alignment: 0
@@ -169,7 +169,7 @@ TextureImporter:
       name: Enemy_Crocodile-01_6
       rect:
         serializedVersion: 2
-        x: 39
+        x: 43
         y: 281
         width: 102
         height: 181

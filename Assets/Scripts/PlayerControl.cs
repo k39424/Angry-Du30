@@ -33,6 +33,9 @@ public class PlayerControl : MonoBehaviour {
 
     Vector3 mousePoint;
 
+    float swipingResistance = 200f;
+
+
     //private Vector2 startPos;
     private Ray ammoToSling;
     
@@ -206,6 +209,8 @@ public class PlayerControl : MonoBehaviour {
 
                 else
                 {
+                 //camera Control
+               
                     // Debug.LogWarning("Not Hit: ");
                     //Do Nothing
                 }
