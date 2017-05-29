@@ -6,6 +6,10 @@ public class EnemyHealth : MonoBehaviour {
     public float currentHealth;
     public LevelManager levelManager;
     public string enemyType;
+    public AudioSource audioSource;
+    public AudioClip hurtFX;
+    public AudioClip deathFX;
+    public float resist = 50f;
 
     public float damage;
     
@@ -14,6 +18,9 @@ public class EnemyHealth : MonoBehaviour {
         damage = 1f;
 
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        //audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        
      }
 
     public void DamageHealth(float damage)
@@ -23,14 +30,22 @@ public class EnemyHealth : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+  
         if (other.gameObject.tag == "Ammo")
         {
             DamageHealth(1f);
+  
+            audioSource.clip = hurtFX;
+            Debug.LogWarning("other: "+other.gameObject.name);
+               audioSource.PlayOneShot(hurtFX);
         }
     }
 
+  
+
     private void Update() {
         if (currentHealth <= 0) {
+            levelManager.UpdateEnemyKilled(enemyType, 1f);
             Dead();
         }
     }
@@ -38,8 +53,13 @@ public class EnemyHealth : MonoBehaviour {
 
     public void Dead()
     {
-        //levelManager.EnemiesKilledCounter();
-        levelManager.UpdateEnemyKilled(enemyType, 1f);
-        Destroy(gameObject);
+            foreach (Transform t in this.transform)
+            {
+               // t.GetComponent<Collider2D>().enabled = false;
+                t.gameObject.SetActive(false);
+            }
+            
+        Destroy(gameObject,1f);
+     
     }
 }

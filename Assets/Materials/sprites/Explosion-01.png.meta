@@ -1,0 +1,692 @@
+fileFormatVersion: 2
+guid: 3bc8c1aee9d3d6f40bc763c644d524da
+timeCreated: 1495596614
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Explosion-01_0
+    21300002: Explosion-01_1
+    21300004: Explosion-01_2
+    21300006: Explosion-01_3
+    21300008: Explosion-01_4
+    21300010: Explosion-01_5
+    21300012: Explosion-01_6
+    21300014: Explosion-01_7
+    21300016: Explosion-01_8
+    21300018: Explosion-01_9
+    21300020: Explosion-01_10
+    21300022: Explosion-01_11
+    21300024: Explosion-01_12
+    21300026: Explosion-01_13
+    21300028: Explosion-01_14
+    21300030: Explosion-01_15
+    21300032: Explosion-01_16
+    21300034: Explosion-01_17
+    21300036: Explosion-01_18
+    21300038: Explosion-01_19
+    21300040: Explosion-01_20
+    21300042: Explosion-01_21
+    21300044: Explosion-01_22
+    21300046: Explosion-01_23
+    21300048: Explosion-01_24
+    21300050: Explosion-01_25
+    21300052: Explosion-01_26
+    21300054: Explosion-01_27
+    21300056: Explosion-01_28
+    21300058: Explosion-01_29
+    21300060: Explosion-01_30
+    21300062: Explosion-01_31
+    21300064: Explosion-01_32
+    21300066: Explosion-01_33
+    21300068: Explosion-01_34
+    21300070: Explosion-01_35
+    21300072: Explosion-01_36
+    21300074: Explosion-01_37
+    21300076: Explosion-01_38
+    21300078: Explosion-01_39
+    21300080: Explosion-01_40
+    21300082: Explosion-01_41
+    21300084: Explosion-01_42
+    21300086: Explosion-01_43
+    21300088: Explosion-01_44
+    21300090: Explosion-01_45
+    21300092: Explosion-01_46
+    21300094: Explosion-01_47
+    21300096: Explosion-01_48
+    21300098: Explosion-01_49
+    21300100: Explosion-01_50
+    21300102: Explosion-01_51
+    21300104: Explosion-01_52
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Explosion-01_2
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 464
+        width: 222
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -80, y: 93}
+        - {x: -111, y: 81}
+        - {x: -111, y: -78}
+        - {x: -73, y: -93}
+        - {x: 87, y: -93}
+        - {x: 111, y: -73}
+        - {x: 111, y: 40}
+        - {x: 76, y: 93}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_3
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 432
+        width: 256
+        height: 218
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 124, y: -1}
+        - {x: 121, y: -7}
+        - {x: 121, y: -9}
+        - {x: 120, y: -10}
+        - {x: 121, y: -7}
+        - {x: 121, y: 2}
+        - {x: 128, y: 9}
+        - {x: 128, y: 79}
+        - {x: 68, y: 109}
+        - {x: -76, y: 109}
+        - {x: -128, y: 67}
+        - {x: -128, y: -109}
+        - {x: 128, y: -109}
+        - {x: 128, y: 2}
+        - {x: 127, y: 1}
+      - - {x: 123, y: -61}
+        - {x: 123, y: -79}
+        - {x: 126, y: -83}
+        - {x: 128, y: -83}
+        - {x: 128, y: -53}
+        - {x: 124, y: -54}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_4
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 387
+        width: 260
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: -51.5}
+        - {x: -31, y: -81.5}
+        - {x: -31, y: -117.5}
+        - {x: -17, y: -128.5}
+        - {x: 17, y: -128.5}
+        - {x: 87, y: -118.5}
+        - {x: 87, y: -58.5}
+        - {x: 73, y: -51.5}
+      - - {x: -81, y: 52.5}
+        - {x: -114, y: 52.5}
+        - {x: -130, y: 45.5}
+        - {x: -130, y: -90.5}
+        - {x: -107, y: -120.5}
+        - {x: -52, y: -120.5}
+        - {x: -37, y: -98.5}
+        - {x: -37, y: -44.5}
+        - {x: -69, y: 47.5}
+      - - {x: 33, y: -50.5}
+        - {x: 34, y: -52.5}
+        - {x: 103, y: -52.5}
+        - {x: 130, y: -35.5}
+        - {x: 130, y: 51.5}
+        - {x: 79, y: 51.5}
+        - {x: 33, y: 7.5}
+      - - {x: -45, y: 9.5}
+        - {x: -49, y: 3.5}
+        - {x: -49, y: -28.5}
+        - {x: -42, y: -42.5}
+        - {x: -2, y: -42.5}
+        - {x: 2, y: -34.5}
+        - {x: 2, y: 7.5}
+        - {x: -4, y: 9.5}
+      - - {x: -130, y: 70.5}
+        - {x: -130, y: 26.5}
+        - {x: -126, y: 26.5}
+        - {x: -119, y: 37.5}
+        - {x: -119, y: 57.5}
+        - {x: -126, y: 70.5}
+      - - {x: -14, y: 128.5}
+        - {x: -59, y: 88.5}
+        - {x: -59, y: 35.5}
+        - {x: -49, y: 33.5}
+        - {x: 77, y: 33.5}
+        - {x: 77, y: 91.5}
+        - {x: 33, y: 128.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_24
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 132
+        width: 263
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -92.5, y: 29}
+        - {x: -129.5, y: 29}
+        - {x: -131.5, y: 28}
+        - {x: -131.5, y: -82}
+        - {x: -106.5, y: -134}
+        - {x: -56.5, y: -134}
+        - {x: -51.5, y: -129}
+        - {x: -51.5, y: -85}
+        - {x: -80.5, y: 25}
+      - - {x: 2.5, y: -60}
+        - {x: -30.5, y: -79}
+        - {x: -30.5, y: -133}
+        - {x: 58.5, y: -133}
+        - {x: 71.5, y: -121}
+        - {x: 71.5, y: -60}
+      - - {x: 38.5, y: 40}
+        - {x: 21.5, y: 0}
+        - {x: 21.5, y: -52}
+        - {x: 36.5, y: -58}
+        - {x: 110.5, y: -58}
+        - {x: 124.5, y: -50}
+        - {x: 124.5, y: 1}
+        - {x: 92.5, y: 40}
+      - - {x: -79.5, y: 134}
+        - {x: -79.5, y: 44}
+        - {x: -69.5, y: 41}
+        - {x: 99.5, y: 41}
+        - {x: 99.5, y: 123}
+        - {x: 52.5, y: 134}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_31
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 117
+        width: 286
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: -62.5}
+        - {x: -28, y: -93.5}
+        - {x: -28, y: -135.5}
+        - {x: -23, y: -145.5}
+        - {x: 26, y: -145.5}
+        - {x: 57, y: -132.5}
+        - {x: 66, y: -104.5}
+        - {x: 66, y: -62.5}
+      - - {x: -97, y: -77.5}
+        - {x: -103, y: -88.5}
+        - {x: -103, y: -120.5}
+        - {x: -89, y: -132.5}
+        - {x: -49, y: -132.5}
+        - {x: -48, y: -128.5}
+        - {x: -48, y: -81.5}
+        - {x: -54, y: -77.5}
+      - - {x: -127, y: -32.5}
+        - {x: -140, y: -40.5}
+        - {x: -140, y: -82.5}
+        - {x: -139, y: -86.5}
+        - {x: -86, y: -86.5}
+        - {x: -84, y: -70.5}
+        - {x: -84, y: -47.5}
+        - {x: -96, y: -32.5}
+      - - {x: 104, y: -3.5}
+        - {x: 90, y: -9.5}
+        - {x: 90, y: -38.5}
+        - {x: 102, y: -52.5}
+        - {x: 133, y: -52.5}
+        - {x: 140, y: -37.5}
+        - {x: 140, y: -12.5}
+        - {x: 131, y: -3.5}
+      - - {x: 48, y: 4.5}
+        - {x: 40, y: -0.5}
+        - {x: 40, y: -28.5}
+        - {x: 46, y: -34.5}
+        - {x: 75, y: -34.5}
+        - {x: 79, y: -30.5}
+        - {x: 79, y: 2.5}
+        - {x: 70, y: 4.5}
+      - - {x: -124, y: 7.5}
+        - {x: -124, y: -20.5}
+        - {x: -121, y: -30.5}
+        - {x: -90, y: -30.5}
+        - {x: -85, y: -19.5}
+        - {x: -85, y: 4.5}
+        - {x: -86, y: 7.5}
+      - - {x: 71, y: 43.5}
+        - {x: 66, y: 41.5}
+        - {x: 66, y: 9.5}
+        - {x: 77, y: 4.5}
+        - {x: 98, y: 4.5}
+        - {x: 105, y: 10.5}
+        - {x: 105, y: 34.5}
+        - {x: 100, y: 43.5}
+      - - {x: -107, y: 39.5}
+        - {x: -123, y: 39.5}
+        - {x: -127, y: 33.5}
+        - {x: -127, y: 20.5}
+        - {x: -125, y: 14.5}
+        - {x: -115, y: 11.5}
+        - {x: -107, y: 11.5}
+        - {x: -99, y: 16.5}
+        - {x: -99, y: 36.5}
+      - - {x: -29, y: 91.5}
+        - {x: -45, y: 91.5}
+        - {x: -53, y: 85.5}
+        - {x: -55, y: 77.5}
+        - {x: -55, y: 64.5}
+        - {x: -47, y: 52.5}
+        - {x: -20, y: 52.5}
+        - {x: -16, y: 61.5}
+        - {x: -16, y: 86.5}
+        - {x: -22, y: 90.5}
+      - - {x: 39, y: 123.5}
+        - {x: 31, y: 111.5}
+        - {x: 31, y: 80.5}
+        - {x: 33, y: 71.5}
+        - {x: 59, y: 62.5}
+        - {x: 100, y: 62.5}
+        - {x: 113, y: 67.5}
+        - {x: 113, y: 96.5}
+        - {x: 82, y: 123.5}
+      - - {x: -6, y: 125.5}
+        - {x: -8, y: 124.5}
+        - {x: -14, y: 117.5}
+        - {x: -14, y: 92.5}
+        - {x: -13, y: 86.5}
+        - {x: 20, y: 86.5}
+        - {x: 24, y: 91.5}
+        - {x: 24, y: 115.5}
+        - {x: 18, y: 125.5}
+      - - {x: -62, y: 141.5}
+        - {x: -73, y: 138.5}
+        - {x: -73, y: 102.5}
+        - {x: -38, y: 102.5}
+        - {x: -34, y: 103.5}
+        - {x: -34, y: 133.5}
+        - {x: -41, y: 141.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_34
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 96
+        width: 264
+        height: 281
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23, y: -98.5}
+        - {x: -28, y: -106.5}
+        - {x: -28, y: -129.5}
+        - {x: -22, y: -140.5}
+        - {x: 3, y: -140.5}
+        - {x: 13, y: -130.5}
+        - {x: 13, y: -101.5}
+        - {x: 2, y: -98.5}
+      - - {x: 41, y: -48.5}
+        - {x: 20, y: -74.5}
+        - {x: 20, y: -90.5}
+        - {x: 31, y: -100.5}
+        - {x: 47, y: -100.5}
+        - {x: 60, y: -95.5}
+        - {x: 64, y: -76.5}
+        - {x: 64, y: -52.5}
+        - {x: 57, y: -48.5}
+      - - {x: -110, y: -18.5}
+        - {x: -117, y: -20.5}
+        - {x: -123, y: -24.5}
+        - {x: -123, y: -46.5}
+        - {x: -117, y: -58.5}
+        - {x: -90, y: -58.5}
+        - {x: -87, y: -48.5}
+        - {x: -87, y: -22.5}
+        - {x: -93, y: -18.5}
+      - - {x: 103, y: 5.5}
+        - {x: 95, y: 3.5}
+        - {x: 91, y: -4.5}
+        - {x: 91, y: -28.5}
+        - {x: 99, y: -34.5}
+        - {x: 125, y: -34.5}
+        - {x: 128, y: -24.5}
+        - {x: 128, y: -1.5}
+        - {x: 116, y: 5.5}
+      - - {x: 55, y: 5.5}
+        - {x: 44, y: 5.5}
+        - {x: 37, y: 4.5}
+        - {x: 30, y: 2.5}
+        - {x: 30, y: -23.5}
+        - {x: 39, y: -26.5}
+        - {x: 57, y: -26.5}
+        - {x: 60, y: -22.5}
+        - {x: 62, y: -12.5}
+        - {x: 62, y: -1.5}
+      - - {x: -119, y: 23.5}
+        - {x: -121, y: 17.5}
+        - {x: -121, y: -3.5}
+        - {x: -114, y: -8.5}
+        - {x: -92, y: -8.5}
+        - {x: -89, y: -0.5}
+        - {x: -89, y: 17.5}
+        - {x: -94, y: 23.5}
+      - - {x: 70, y: 53.5}
+        - {x: 63, y: 45.5}
+        - {x: 63, y: 32.5}
+        - {x: 68, y: 22.5}
+        - {x: 88, y: 22.5}
+        - {x: 95, y: 29.5}
+        - {x: 95, y: 44.5}
+        - {x: 87, y: 53.5}
+      - - {x: -114, y: 51.5}
+        - {x: -120, y: 50.5}
+        - {x: -120, y: 30.5}
+        - {x: -100, y: 30.5}
+        - {x: -98, y: 37.5}
+        - {x: -98, y: 46.5}
+        - {x: -103, y: 51.5}
+      - - {x: -59, y: 96.5}
+        - {x: -67, y: 92.5}
+        - {x: -67, y: 74.5}
+        - {x: -59, y: 65.5}
+        - {x: -40, y: 65.5}
+        - {x: -35, y: 73.5}
+        - {x: -35, y: 93.5}
+        - {x: -38, y: 96.5}
+      - - {x: 102, y: 107.5}
+        - {x: 83, y: 107.5}
+        - {x: 72, y: 100.5}
+        - {x: 72, y: 74.5}
+        - {x: 79, y: 70.5}
+        - {x: 103, y: 70.5}
+        - {x: 108, y: 76.5}
+        - {x: 108, y: 97.5}
+      - - {x: 34, y: 133.5}
+        - {x: 28, y: 123.5}
+        - {x: 28, y: 96.5}
+        - {x: 38, y: 91.5}
+        - {x: 68, y: 91.5}
+        - {x: 70, y: 94.5}
+        - {x: 70, y: 130.5}
+        - {x: 64, y: 133.5}
+      - - {x: -72, y: 137.5}
+        - {x: -77, y: 128.5}
+        - {x: -77, y: 113.5}
+        - {x: -69, y: 106.5}
+        - {x: -48, y: 106.5}
+        - {x: -42, y: 118.5}
+        - {x: -42, y: 127.5}
+        - {x: -55, y: 137.5}
+      - - {x: -10, y: 133.5}
+        - {x: -16, y: 130.5}
+        - {x: -16, y: 112.5}
+        - {x: -14, y: 108.5}
+        - {x: -10, y: 107.5}
+        - {x: 4, y: 107.5}
+        - {x: 10, y: 109.5}
+        - {x: 10, y: 131.5}
+        - {x: 8, y: 133.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_39
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 80
+        width: 261
+        height: 285
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18.5, y: -95.5}
+        - {x: -23.5, y: -98.5}
+        - {x: -32.5, y: -103.5}
+        - {x: -32.5, y: -127.5}
+        - {x: -26.5, y: -140.5}
+        - {x: -7.5, y: -140.5}
+        - {x: 8.5, y: -131.5}
+        - {x: 8.5, y: -107.5}
+        - {x: 4.5, y: -95.5}
+      - - {x: 54.5, y: -46.5}
+        - {x: 42.5, y: -46.5}
+        - {x: 33.5, y: -49.5}
+        - {x: 16.5, y: -69.5}
+        - {x: 16.5, y: -84.5}
+        - {x: 17.5, y: -91.5}
+        - {x: 25.5, y: -96.5}
+        - {x: 40.5, y: -96.5}
+        - {x: 47.5, y: -95.5}
+        - {x: 55.5, y: -84.5}
+        - {x: 60.5, y: -62.5}
+        - {x: 60.5, y: -50.5}
+      - - {x: -116.5, y: -15.5}
+        - {x: -127.5, y: -24.5}
+        - {x: -127.5, y: -46.5}
+        - {x: -123.5, y: -51.5}
+        - {x: -93.5, y: -51.5}
+        - {x: -91.5, y: -42.5}
+        - {x: -91.5, y: -19.5}
+        - {x: -103.5, y: -15.5}
+      - - {x: 95.5, y: 4.5}
+        - {x: 86.5, y: 0.5}
+        - {x: 86.5, y: -32.5}
+        - {x: 112.5, y: -32.5}
+        - {x: 122.5, y: -29.5}
+        - {x: 122.5, y: -4.5}
+        - {x: 115.5, y: 4.5}
+      - - {x: 28.5, y: 8.5}
+        - {x: 26.5, y: 1.5}
+        - {x: 26.5, y: -19.5}
+        - {x: 34.5, y: -22.5}
+        - {x: 50.5, y: -22.5}
+        - {x: 57.5, y: -16.5}
+        - {x: 57.5, y: 0.5}
+        - {x: 52.5, y: 8.5}
+      - - {x: -121.5, y: 26.5}
+        - {x: -125.5, y: 16.5}
+        - {x: -125.5, y: -1.5}
+        - {x: -122.5, y: -4.5}
+        - {x: -102.5, y: -4.5}
+        - {x: -93.5, y: 0.5}
+        - {x: -93.5, y: 19.5}
+        - {x: -102.5, y: 26.5}
+      - - {x: 84.5, y: 55.5}
+        - {x: 78.5, y: 56.5}
+        - {x: 67.5, y: 56.5}
+        - {x: 58.5, y: 50.5}
+        - {x: 58.5, y: 35.5}
+        - {x: 62.5, y: 24.5}
+        - {x: 79.5, y: 24.5}
+        - {x: 89.5, y: 31.5}
+        - {x: 90.5, y: 34.5}
+        - {x: 90.5, y: 47.5}
+      - - {x: -118.5, y: 54.5}
+        - {x: -124.5, y: 48.5}
+        - {x: -124.5, y: 39.5}
+        - {x: -121.5, y: 32.5}
+        - {x: -117.5, y: 31.5}
+        - {x: -109.5, y: 31.5}
+        - {x: -101.5, y: 37.5}
+        - {x: -101.5, y: 45.5}
+        - {x: -105.5, y: 54.5}
+      - - {x: -62.5, y: 103.5}
+        - {x: -71.5, y: 93.5}
+        - {x: -71.5, y: 76.5}
+        - {x: -70.5, y: 73.5}
+        - {x: -62.5, y: 68.5}
+        - {x: -51.5, y: 68.5}
+        - {x: -46.5, y: 69.5}
+        - {x: -39.5, y: 75.5}
+        - {x: -39.5, y: 94.5}
+        - {x: -51.5, y: 103.5}
+      - - {x: 97.5, y: 108.5}
+        - {x: 95.5, y: 109.5}
+        - {x: 72.5, y: 109.5}
+        - {x: 66.5, y: 99.5}
+        - {x: 66.5, y: 80.5}
+        - {x: 72.5, y: 74.5}
+        - {x: 82.5, y: 71.5}
+        - {x: 92.5, y: 71.5}
+        - {x: 102.5, y: 78.5}
+        - {x: 103.5, y: 86.5}
+        - {x: 103.5, y: 100.5}
+      - - {x: 32.5, y: 136.5}
+        - {x: 24.5, y: 133.5}
+        - {x: 24.5, y: 104.5}
+        - {x: 36.5, y: 94.5}
+        - {x: 53.5, y: 94.5}
+        - {x: 65.5, y: 99.5}
+        - {x: 65.5, y: 129.5}
+        - {x: 61.5, y: 136.5}
+      - - {x: -71.5, y: 140.5}
+        - {x: -81.5, y: 136.5}
+        - {x: -81.5, y: 113.5}
+        - {x: -71.5, y: 107.5}
+        - {x: -50.5, y: 107.5}
+        - {x: -50.5, y: 140.5}
+      - - {x: -17.5, y: 136.5}
+        - {x: -21.5, y: 128.5}
+        - {x: -21.5, y: 112.5}
+        - {x: -12.5, y: 109.5}
+        - {x: 3.5, y: 109.5}
+        - {x: 6.5, y: 111.5}
+        - {x: 6.5, y: 129.5}
+        - {x: 5.5, y: 136.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_51
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 507
+        width: 117
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_52
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 473
+        width: 197
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Explosion-01_5
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 89
+        width: 259
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
