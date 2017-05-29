@@ -50,6 +50,8 @@ public class PlayerControl : MonoBehaviour {
     private bool clicked;
     public Collider2D colHit;
 
+    public Animator anim;
+
     private void Awake()
     {
         slingShot = this.gameObject;
@@ -220,6 +222,7 @@ public class PlayerControl : MonoBehaviour {
                         //Debug.LogWarning("Hit");
                         LineRendererUpdate();
                         clicked = true;
+                        anim.SetTrigger("isAiming");
                         spring.enabled = false;
                         Dragging();
                     }
@@ -274,7 +277,8 @@ public class PlayerControl : MonoBehaviour {
        mousePoint = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
         Vector2 slingToMouse = mousePoint - slingShot.transform.position;
         angle = Mathf.Atan2(mousePoint.x, mousePoint.y) * Mathf.Rad2Deg;
-
+        
+        
         //Debug.LogWarning("Angle : " + angle);
 
        // if (angle >= -115 && angle <= -110 )
