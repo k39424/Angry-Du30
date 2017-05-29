@@ -8,6 +8,9 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour
 {
     // public float enemiesToKill;
+    [Header("Camera")]
+    public CameraController cameraController;
+    [Space]
 
     [Header("Player")]
     public PlayerControl playerControl;
@@ -17,8 +20,14 @@ public class LevelManager : MonoBehaviour
     [Header("UI")]
     public GameObject winPanel;
     public GameObject losePanel;
-    public GameObject pauseMenu;
+    public GameObject pauseBttn;
     public GameObject pausePanel;
+    public Animator winAnim;
+    public Animator loseAnim;
+    public GameObject winImage;
+    public GameObject loseImage;
+  
+
     [Space]
     [Header("UI-Objectives")]
     public Text criminalNumText;
@@ -37,18 +46,29 @@ public class LevelManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip bgm;
 
-   
-    public void Start()
-    {
-        if (Time.timeScale == 0)
-            Time.timeScale = 1;
 
+    private void Awake()
+    {
         playerControl = GameObject.Find("SlingFront").GetComponent<PlayerControl>();
         audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+    }
+   
+    public void Start()
+    {   
+        if (winPanel.activeSelf == true) winPanel.SetActive(false);
+
+        if (losePanel.activeSelf == true) losePanel.SetActive(false);
+
+        if (Time.timeScale == 0) Time.timeScale = 1;
+
+      
         GetComponent<AudioSource>();
+        cameraController = Camera.main.GetComponent<CameraController>();
         
         pausePanel.SetActive(false);
 
+        winAnim = winImage.GetComponent<Animator>();
+        loseAnim = loseImage.GetComponent<Animator>();
 
         crocsToKillText.text = crocsToKill.ToString();
         criminalsToKillText.text = criminalsToKill.ToString();
@@ -78,7 +98,9 @@ public class LevelManager : MonoBehaviour
         playerControl.enabled = false;
         HideUI();
         winPanel.SetActive(true);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        winAnim.SetTrigger("win");
+       
     }
 
     public void YouLose()
@@ -86,33 +108,37 @@ public class LevelManager : MonoBehaviour
         playerControl.enabled = false;
         HideUI();
         losePanel.SetActive(true);
-        Time.timeScale = 0;
+        loseAnim.SetTrigger("lose");
+        //Time.timeScale = 0;
     }
 
     //Update number of killed enemies by getting its EnemyType and incrementing criminalNum
     public void UpdateEnemyKilled(string enemyType, float killedNumber)
     {
-        
+        if (enemyType == null)return;
+
         if (enemyType == "Criminal")
         {
             criminalNum += killedNumber;
             criminalNumText.text = criminalNum.ToString();
-
-            return;
         }
 
-        crocNum += killedNumber;
-        crocNumText.text = crocNum.ToString();   
+        else if (enemyType == "Crocodile")
+        {
+            crocNum += killedNumber;
+            crocNumText.text = crocNum.ToString();
+        }
+        
     }
 
     // Pause Button
     public void TogglePauseMenu()
     {
-        if (Time.timeScale == 0) return;
+        //if (Time.timeScale == 0) return;
 
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        pauseBttn.SetActive(!pauseBttn.activeSelf);
         pausePanel.SetActive(!pausePanel.activeSelf);
-        Time.timeScale = (pauseMenu.activeSelf) ? 1 : 0;
+        Time.timeScale = (pauseBttn.activeSelf) ? 1 : 0;
     }
 
     //Retry Button
@@ -131,6 +157,9 @@ public class LevelManager : MonoBehaviour
     //Hide UI on Win or Lose
     public void HideUI()
     {
+        playerControl.enabled = false;
+        cameraController.enabled = false;
+
         foreach( Transform t in inCanvas.transform)
         {
             t.gameObject.SetActive(false);
@@ -140,4 +169,6 @@ public class LevelManager : MonoBehaviour
     {
         ammoCount = ammo;
     }
+
+    
 }

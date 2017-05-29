@@ -3,23 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
+    [Header("Pre-defined Values:")]
+    public LineRenderer slingBack;
+    public LineRenderer slingFront;
+    public GameObject ammoPrefab;
+    public Transform ammoRespawn;
+    public float reloadRate;
+    public float maxAmmo;
+    public GameObject dotObj;
+    public CameraController cameraController;
+    public float numOfDots;
+    public float maxLength;
+
+    [Space]
     public GameObject slingShot;
     public Transform slingTrans;
     public Rigidbody2D myRigid;
-    public LineRenderer slingBack;
-    public LineRenderer slingFront;
-
-    public GameObject ammoPrefab;
+   
+    [Space]
+   
     public GameObject ammo;
-    public Transform ammoRespawn;
+    
     public SpringJoint2D spring;
     public Rigidbody2D ammoRigid;
     private float reloadTime;
-    public float reloadRate;
-
+  
+    [Space]
     private float ammoCount;
-    public float maxAmmo;
-    public float maxLength;
+   
+  
     public float maxLengthSqr;
     public Vector2 prevVelocity;
     private Ray rayToMouse; //for limiting length
@@ -33,16 +45,16 @@ public class PlayerControl : MonoBehaviour {
 
     Vector3 mousePoint;
 
-    public CameraController cameraController;
+   
     public LevelManager levelManager;
 
     //private Vector2 startPos;
     private Ray ammoToSling;
     
-    public GameObject dotObj;
+  
 
     public List<GameObject> trajectDots;
-    public float numOfDots;
+  
    
     Vector2 initVel;
     private bool clicked;
@@ -52,6 +64,7 @@ public class PlayerControl : MonoBehaviour {
 
     private void Awake()
     {
+        cameraController = Camera.main.GetComponent<CameraController>();
         slingShot = this.gameObject;
         slingFront = GetComponent<LineRenderer>();
         //  slingFront = GetComponentInChildren<LineRenderer>();
@@ -188,7 +201,7 @@ public class PlayerControl : MonoBehaviour {
         StopAllCoroutines();
         if (ammo == null)
             return;
-
+        
         spring = ammo.GetComponent<SpringJoint2D>();
         ammoRigid = ammo.GetComponent<Rigidbody2D>();
         spring.connectedBody = myRigid.GetComponent<Rigidbody2D>();
@@ -218,7 +231,7 @@ public class PlayerControl : MonoBehaviour {
             {
                 Debug.LogWarning("2");
                 if (spring == null)
-                    SetAmmo();
+                    return;
 
                 Debug.LogWarning("Ammo: "+ammoCount.ToString());
                 Debug.LogWarning("3");
